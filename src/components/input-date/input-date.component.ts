@@ -8,6 +8,7 @@ import {
   forwardRef,
   signal,
 } from '@angular/core';
+
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as dayjs from 'dayjs';
 import { IconComponent } from '../icon/icon.component';
@@ -36,7 +37,7 @@ export class InputDateComponent implements ControlValueAccessor, OnInit {
   icon = IconsEnum.Calendar;
 
   private selectedDate: Signal<dayjs.Dayjs> = signal(null);
-  private value = computed(() =>
+  private _value = computed(() =>
     this.dateOnly
       ? DateUtils.convertToDate(this.selectedDate())
       : DateUtils.convertToDateTime(this.selectedDate())
