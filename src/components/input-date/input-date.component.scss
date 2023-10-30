@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .input-container {
+    width: 10rem;
+    height: 1.75rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 0.5rem;
+    font-size: 1rem;
+  }
+}
