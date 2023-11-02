@@ -1,0 +1,9 @@
+{
+  "input.field.placeholder": "YYYY/MM/DD",
+  "input.date.close": "Close",
+  "inpudate.date.delete": "Clear",
+  "inpudate.date.today": "Today",
+  "inpudate.date.days": "Days",
+  "inpudate.date.Months": "Months",
+  "inpudate.date.years": "Years"
+}
