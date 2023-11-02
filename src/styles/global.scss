@@ -1,0 +1,13 @@
+@import "./colors.scss";
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 62.5%;
+}
