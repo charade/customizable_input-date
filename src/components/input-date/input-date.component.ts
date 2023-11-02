@@ -5,31 +5,33 @@ import {
   Input,
   OnInit,
   Signal,
+  TemplateRef,
   ViewChild,
+  ViewContainerRef,
   computed,
   forwardRef,
   inject,
   signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import * as dayjs from 'dayjs';
 
 import { IconComponent } from '../icon/icon.component';
 
 import { DateUtils } from 'src/app/utils/date-utils';
-import { CustomOverlayService } from '../custom-overlay/overlay.service';
+import { CustomOverlayService } from '../../app/services/custom-overlay/overlay.service';
 
 import { IconsEnum } from '../icon/utils/icons-names.enum';
-import { PopoverComponent } from '../popover/popover.component';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { ScrollStrategyEnum } from '../../app/services/custom-overlay/overlay.config';
+import { CustomControlValueAccessor } from 'src/app/utils/control-value-accessor';
 
 @Component({
   selector: 'app-input-date',
   templateUrl: './input-date.component.html',
   styleUrls: ['./input-date.component.scss'],
   standalone: true,
-  imports: [IconComponent, PopoverComponent, CdkOverlayOrigin],
+  imports: [IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     CustomOverlayService,
@@ -40,7 +42,7 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
     },
   ],
 })
-export class InputDateComponent implements ControlValueAccessor, OnInit {
+export class InputDateComponent extends CustomControlValueAccessor {
   @ViewChild('popoverOrigin', { read: ElementRef<HTMLDivElement> })
   popoverOrigin: ElementRef<HTMLDivElement>;
 
@@ -48,48 +50,31 @@ export class InputDateComponent implements ControlValueAccessor, OnInit {
   @Input() endDate: string;
   @Input() dateOnly = false;
 
-  dateField: ComponentType<HTMLDivElement>;
-
   icon = IconsEnum.Calendar;
-  disabled = false;
 
   private selectedDate: Signal<dayjs.Dayjs> = signal(null);
+  private viewContainerRef = inject(ViewContainerRef);
 
-  private _value = computed(() => {
-    if (this.disabled) {
-      return;
-    }
+  override ngOnInit(): void {
+    this.value = computed(() => {
+      if (this.disabled) {
+        return;
+      }
 
-    return this.dateOnly
-      ? DateUtils.convertToDate(this.selectedDate())
-      : DateUtils.convertToDateTime(this.selectedDate());
-  });
+      return this.dateOnly
+        ? DateUtils.convertToDate(this.selectedDate())
+        : DateUtils.convertToDateTime(this.selectedDate());
+    })();
+  }
 
   private overlayService = inject(CustomOverlayService);
 
-  ngOnInit(): void {}
-
-  onChange: (value: string) => void;
-  onTouch: () => void;
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  writeValue(value: string): void {}
-
-  openDatePickerOnClick() {
-    this.overlayService.open(PopoverComponent, {
+  openDatePickerOnClick(inputDateContent: TemplateRef<any>) {
+    this.overlayService.open(inputDateContent, {
       origin: this.popoverOrigin,
-      closeOnbackDropClicked: true,
+      scrollStrategy: ScrollStrategyEnum.Block,
+      viewContainerRef: this.viewContainerRef,
+      config: { width: '18rem', height: '20rem', hasBackdrop: true },
     });
   }
 }

@@ -1,4 +1,10 @@
-<div #popoverOrigin class="input-container" (click)="openDatePickerOnClick()">
+<div #popoverOrigin class="input-container" (click)="openDatePickerOnClick(inputDateContent)">
     <span class="input-field"></span>
     <app-icon [name]="icon" />
 </div>
+
+<ng-template #inputDateContent>
+    <div class="input-date-content-container">
+        Template works!
+    </div>
+</ng-template>
