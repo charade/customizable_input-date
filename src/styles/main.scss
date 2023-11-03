@@ -1,4 +1,3 @@
-@import "./colors.scss";
 @import "~@angular/cdk/overlay-prebuilt.css";
 
 html,
@@ -15,9 +14,10 @@ body {
 
 .cdk-overlay-pane {
   box-shadow: 0 0 3px;
-  background-color: $white;
-  border-radius: 3px;
-  padding: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 12px 12px 8px 8px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .cdk-overlay-backdrop {

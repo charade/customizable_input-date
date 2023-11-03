@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
-enum PathsEnum {
+enum AppPathsEnum {
   Components = 'components',
 }
 
 export const appRoutes: Routes = [
   {
-    path: PathsEnum.Components,
-    loadComponent: () =>
-      import('../components/input-date/input-date.component').then(
-        (c) => c.InputDateComponent
-      ),
+    path: AppPathsEnum.Components,
+    loadChildren: () =>
+      import('../components/components.module').then((c) => c.ComponentsModule),
   },
-  { path: '**', redirectTo: PathsEnum.Components, pathMatch: 'full' },
+  { path: '**', redirectTo: AppPathsEnum.Components, pathMatch: 'full' },
 ];

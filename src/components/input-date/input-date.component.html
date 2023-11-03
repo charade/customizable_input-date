@@ -1,10 +1,72 @@
-<div #popoverOrigin class="input-container" (click)="openDatePickerOnClick(inputDateContent)">
-    <span class="input-field"></span>
-    <app-icon [name]="icon" />
+<div class="block-container">
+  <div
+    #popoverOrigin
+    class="input-container"
+    (click)="openDatePickerOnClick(inputDateContent)"
+  >
+    <span class="input-field">{{ displayedDate() }}</span>
+    <app-icon [name]="IconsEnum.Calendar" />
+  </div>
+  <div class="clear-icon">
+    <app-icon [name]="IconsEnum.Trash" />
+  </div>
 </div>
-
 <ng-template #inputDateContent>
-    <div class="input-date-content-container">
-        Template works!
+  <div class="date-picker-overlay">
+    <div class="calendar-header">
+      <span> {{ "input.date.today" | translate }}</span>
+      <span class=""> {{ "input.date.clear" | translate }}</span>
     </div>
+
+    <div class="date-view-mode-panel">
+      <div class="chevron-left-icon">
+        <app-icon
+          [name]="IconsEnum.AngleLeft"
+          (click)="swipeDisplayedView(-1)"
+        />
+      </div>
+      <div class="view-mode-container">
+        <h1 class="view-mode">
+          {{ InputDateEnum.viewModeToString.value(viewMode()) | translate }}
+        </h1>
+      </div>
+      <div class="chevron-right-icon">
+        <app-icon
+          [name]="IconsEnum.AngleRight"
+          (click)="swipeDisplayedView(1)"
+        />
+      </div>
+    </div>
+
+    <div class="date-content">
+      <table
+        cdk-table
+        *ngIf="viewMode() === InputDateEnum.View.Dayjs"
+        class="date-content"
+        [dataSource]="daysDataSource$"
+      >
+        <ng-container
+          *ngFor="
+            let headerName of displayedColumns;
+            let column = index;
+            let first = first
+          "
+          [cdkColumnDef]="headerName"
+        >
+          <th cdk-header-cell *cdkHeaderCellDef>
+            <span>
+              {{ headerName | translate }}
+            </span>
+          </th>
+          <td cdk-cell *cdkCellDef="let day" [ngClass]="{outOfMonth: day[column]?.swipeMonth}">
+            <span>
+              {{ day[column]?.value }}
+            </span>
+          </td>
+        </ng-container>
+        <cdk-header-row *cdkHeaderRowDef="displayedColumns"></cdk-header-row>
+        <cdk-row *cdkRowDef="let row; columns: displayedColumns"></cdk-row>
+      </table>
+    </div>
+  </div>
 </ng-template>

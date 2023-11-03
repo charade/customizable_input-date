@@ -5,7 +5,7 @@ export class CustomMap<K, V> {
     entries.forEach(([key, value]) => this.map.set(key, value));
   }
 
-  public getValue(key: K): V {
+  public value(key: K): V {
     return this.map.has(key) ? this.map.get(key) : this.defaultValue;
   }
 }

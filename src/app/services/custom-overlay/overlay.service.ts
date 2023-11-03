@@ -32,7 +32,7 @@ export class CustomOverlayService implements OnDestroy {
     const overlayConfig = {
       ...OverlayUtils.DEFAULT_CONFIG(this.overlay, overlayData.origin),
       ...overlayData.config,
-      scrollStrategy: OverlayUtils.getScrollStrategy(this.overlay).getValue(
+      scrollStrategy: OverlayUtils.getScrollStrategy(this.overlay).value(
         overlayData.scrollStrategy
       ),
     };

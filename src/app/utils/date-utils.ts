@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs';
+import { Language } from './languages';
 
 dayjs.locale('en');
 
@@ -24,10 +25,44 @@ export namespace DateUtils {
     return isValidDate(date) && dayjs(date).format(format || 'DD/MM/YYY');
   };
 
+  export const isOutOfDateRange = (
+    minDate?: dayjs.Dayjs,
+    maxDate?: dayjs.Dayjs,
+    ...dates: dayjs.Dayjs[]
+  ): boolean => {
+    return dates.every(
+      (date) =>
+        (minDate && date.isAfter(minDate) && date) ||
+        (maxDate && date.isBefore(maxDate))
+    );
+  };
+
   export const convertToDateTime = (
     date: DateType,
     format?: string
   ): string => {
     return isValidDate(date) && dayjs(date).format(format || 'DD/MM/YYY HH:MM');
+  };
+
+  const formaDateUnit = (unit: number): string => {
+    return `${unit < 10 ? '0' + unit : unit}`;
+  };
+
+  export const formatDate = (
+    date: dayjs.Dayjs,
+    locale: string,
+    displayTime?: boolean
+  ): string => {
+    const month = formaDateUnit(date.month());
+    const hours = formaDateUnit(date.hour());
+    const minutes = formaDateUnit(date.minute());
+
+    return Language.convertLocalToLang.value(locale) === Language.Fr
+      ? `${date.date()}/ ${month}/ ${date.year()} - ${
+          displayTime && hours + ' : ' + minutes
+        } `
+      : `${date.year()}/ ${month}/ ${date.date()} - ${
+          displayTime && hours + ' : ' + minutes
+        }`;
   };
 }
