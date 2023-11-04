@@ -3,11 +3,9 @@ import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
 export class CustomControlValueAccessor<T = string>
-  implements ControlValueAccessor, OnInit
+  implements ControlValueAccessor
 {
   protected disabled = false;
-
-  ngOnInit(): void {}
 
   value: T;
   onChange: (value: string) => void;

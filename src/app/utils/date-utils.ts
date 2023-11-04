@@ -26,14 +26,13 @@ export namespace DateUtils {
   };
 
   export const isOutOfDateRange = (
+    date: dayjs.Dayjs,
     minDate?: dayjs.Dayjs,
-    maxDate?: dayjs.Dayjs,
-    ...dates: dayjs.Dayjs[]
+    maxDate?: dayjs.Dayjs
   ): boolean => {
-    return dates.every(
-      (date) =>
-        (minDate && date.isAfter(minDate) && date) ||
-        (maxDate && date.isBefore(maxDate))
+    return (
+      (isValidDate(minDate) && isValidDate(date) && date.isAfter(minDate)) ||
+      (isValidDate(maxDate) && isValidDate(date) && date.isBefore(maxDate))
     );
   };
 

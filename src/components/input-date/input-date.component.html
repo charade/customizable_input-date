@@ -22,7 +22,7 @@
       <div class="chevron-left-icon">
         <app-icon
           [name]="IconsEnum.AngleLeft"
-          (click)="swipeDisplayedView(-1)"
+          (click)="swipeViewOnDoubleArrowClick(-1)"
         />
       </div>
       <div class="view-mode-container">
@@ -33,7 +33,7 @@
       <div class="chevron-right-icon">
         <app-icon
           [name]="IconsEnum.AngleRight"
-          (click)="swipeDisplayedView(1)"
+          (click)="swipeViewOnDoubleArrowClick(1)"
         />
       </div>
     </div>
@@ -42,15 +42,10 @@
       <table
         cdk-table
         *ngIf="viewMode() === InputDateEnum.View.Dayjs"
-        class="date-content"
         [dataSource]="daysDataSource$"
       >
         <ng-container
-          *ngFor="
-            let headerName of displayedColumns;
-            let column = index;
-            let first = first
-          "
+          *ngFor="let headerName of daysTableColumns; let column = index"
           [cdkColumnDef]="headerName"
         >
           <th cdk-header-cell *cdkHeaderCellDef>
@@ -58,14 +53,71 @@
               {{ headerName | translate }}
             </span>
           </th>
-          <td cdk-cell *cdkCellDef="let day" [ngClass]="{outOfMonth: day[column]?.swipeMonth}">
+          <td
+            cdk-cell
+            *cdkCellDef="let day"
+            [ngClass]="{
+              outOfMonth: day[column]?.swipeMonth,
+              selected: day[column]?.isSelected
+            }"
+            (click)="setDay(day[column]?.value)"
+          >
             <span>
               {{ day[column]?.value }}
             </span>
           </td>
         </ng-container>
-        <cdk-header-row *cdkHeaderRowDef="displayedColumns"></cdk-header-row>
-        <cdk-row *cdkRowDef="let row; columns: displayedColumns"></cdk-row>
+        <cdk-header-row *cdkHeaderRowDef="daysTableColumns"></cdk-header-row>
+        <cdk-row *cdkRowDef="let row; columns: daysTableColumns"></cdk-row>
+      </table>
+
+      <table
+        cdk-table
+        *ngIf="viewMode() === InputDateEnum.View.Months"
+        class="months-table"
+        [dataSource]="monthsDataSource$"
+      >
+        <ng-container
+          *ngFor="let fakeHeader of monthsTableFakeHeaders; let column = index"
+          [cdkColumnDef]="fakeHeader"
+        >
+          <th cdk-header-cell *cdkHeaderCellDef></th>
+          <td
+            class="months-table"
+            cdk-cell
+            *cdkCellDef="let month"
+            (click)="setMonth(month[column]?.value)"
+          >
+            <span>
+              {{ month[column]?.label | translate }}
+            </span>
+          </td>
+        </ng-container>
+        <tr
+          cdk-header-row
+          class="months-table"
+          *cdkHeaderRowDef="monthsTableFakeHeaders"
+        ></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: monthsTableFakeHeaders"></tr>
+      </table>
+
+      <table
+        *ngIf="viewMode() === InputDateEnum.View.Years"
+        class="years-table"
+        cdk-table
+        [dataSource]="yearsDataSource$"
+      >
+        <ng-container
+          *ngFor="let year of yearsTableFakeHeaders; let column = index"
+          [cdkColumnDef]="year"
+        >
+          <th cdk-header-cell *cdkHeaderCellDef></th>
+          <td class="years-table" cdk-cell *cdkCellDef="let year" (click)="setYear(year[column]?.value)">
+            <span>{{ year[column]?.value }}</span>
+          </td>
+        </ng-container>
+        <tr cdk-header-row *cdkHeaderRowDef="yearsTableFakeHeaders"></tr>
+        <tr cdk-row *cdkRowDef="let row; columns: yearsTableFakeHeaders"></tr>
       </table>
     </div>
   </div>

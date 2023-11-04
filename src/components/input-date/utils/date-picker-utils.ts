@@ -3,11 +3,15 @@ import { range } from 'lodash';
 import { DateUtils } from 'src/app/utils/date-utils';
 import { InputDateEnum } from './input-date.enum';
 
-export namespace InputDateUtils {
+export namespace DatePickerUtils {
+  const BIG_BANG_YEAR = 1600;
+  const APOCALYPSE_YEAR = 2504;
+
   export interface DateType {
     value: string | number;
     outOfDate: boolean;
     isSelected?: boolean;
+    label?: string;
   }
 
   export type Day = DateType & {
@@ -15,10 +19,11 @@ export namespace InputDateUtils {
   };
 
   export const generateDaysOfMonth = (
-    selectedDate: dayjs.Dayjs,
+    date: dayjs.Dayjs,
     minDate?: dayjs.Dayjs,
     maxDate?: dayjs.Dayjs
   ): Day[][] => {
+    const selectedDate = dayjs(date);
     const firstWeekDayOfMonth = selectedDate.startOf('month').day();
 
     const lastWeekDayOfMonth = selectedDate.endOf('month').day();
@@ -27,40 +32,37 @@ export namespace InputDateUtils {
     const displayedDays: Day[] = [];
     const daysDataSource: Day[][] = [];
 
-    const diffDaysWithLastMonth = range(7, firstWeekDayOfMonth + 1).length - 1;
+    const diffDaysWithPastMonth = range(7, firstWeekDayOfMonth + 1).length - 1;
     /*Filling the start of the week with past month days
      * if the selected month doesn't start on Monday
      */
-    if (diffDaysWithLastMonth) {
+    if (diffDaysWithPastMonth) {
       displayedDays.push(
         ...range(
-          daysInLastMonth - diffDaysWithLastMonth + 1,
+          daysInLastMonth - diffDaysWithPastMonth + 1,
           daysInLastMonth + 1
         ).map(
-          (dayOfMonth: number): Day => ({
+          (monthDay: number): Day => ({
             swipeMonth: -1,
-            value: dayOfMonth,
-            outOfDate: [minDate, maxDate].some((date) => {
-              const dateMinusOneMonth = selectedDate.subtract(1, 'month');
-
-              return (
-                DateUtils.isValidDate(date) &&
-                DateUtils.isOutOfDateRange(minDate, maxDate, dateMinusOneMonth)
-              );
-            }),
+            value: monthDay,
+            outOfDate: DateUtils.isOutOfDateRange(
+              dayjs(selectedDate).subtract(1, 'month').set('date', monthDay),
+              minDate,
+              maxDate
+            ),
           })
         )
       );
     }
     /* Filling then with the selected month days */
     displayedDays.push(
-      ...range(0, selectedDate.daysInMonth()).map(
+      ...range(1, selectedDate.daysInMonth() + 1).map(
         (monthDay: number): Day => ({
-          value: monthDay + 1,
-          outOfDate: [minDate, maxDate].some(
-            (date) =>
-              DateUtils.isValidDate(date) &&
-              DateUtils.isOutOfDateRange(minDate, maxDate, selectedDate)
+          value: monthDay,
+          outOfDate: DateUtils.isOutOfDateRange(
+            dayjs(selectedDate).set('date', monthDay),
+            minDate,
+            maxDate
           ),
         })
       )
@@ -74,13 +76,11 @@ export namespace InputDateUtils {
           (monthDay: number): Day => ({
             value: monthDay,
             swipeMonth: 1,
-            outOfDate: [minDate, maxDate].some((date) => {
-              const datePlusOneMonth = selectedDate.add(1, 'month');
-              return (
-                DateUtils.isValidDate(date) &&
-                DateUtils.isOutOfDateRange(minDate, maxDate, datePlusOneMonth)
-              );
-            }),
+            outOfDate: DateUtils.isOutOfDateRange(
+              dayjs(selectedDate).add(1, 'month').set('date', monthDay),
+              minDate,
+              maxDate
+            ),
           })
         )
       );
@@ -93,29 +93,46 @@ export namespace InputDateUtils {
     return daysDataSource;
   };
 
-  export const generateMonth = (): DateType[][] => {
+  export const generateMonths = (
+    date: dayjs.Dayjs,
+    minDate: dayjs.Dayjs,
+    maxDate: dayjs.Dayjs
+  ): DateType[][] => {
     const monthDataSource: DateType[][] = [];
+    const selectedDate = dayjs(date);
 
-    const months = range(1, 13).map((month) =>
-      InputDateEnum.getMonthName.value(month)
-    );
+    const months: DateType[] = range(1, 13).map((month) => ({
+      value: month,
+      label: InputDateEnum.getMonthName.value(month),
+      outOfDate:
+        selectedDate.set('month', month).isBefore(minDate) ||
+        selectedDate.set('month', month).isAfter(maxDate),
+    }));
 
     while (months.length) {
-      monthDataSource.push(months.splice(0, 5));
+      monthDataSource.push(months.splice(0, 4));
     }
 
     return monthDataSource;
   };
 
   export const generateYears = (
-    big_bang: number,
-    apocalypse: number
+    minDate: dayjs.Dayjs,
+    maxDate: dayjs.Dayjs
   ): DateType[][] => {
     const yearsDataSource: DateType[][] = [];
-    const years = range(big_bang, apocalypse);
+
+    const years: DateType[] = range(BIG_BANG_YEAR, APOCALYPSE_YEAR).map(
+      (year) => ({
+        value: year,
+        outOfDate:
+          dayjs().set('year', year).isBefore(minDate) ||
+          dayjs().set('year', year).isAfter(maxDate),
+      })
+    );
 
     while (years.length) {
-      yearsDataSource.push(years.splice(big_bang, apocalypse + 1));
+      yearsDataSource.push(years.splice(0, 7));
     }
 
     return yearsDataSource;

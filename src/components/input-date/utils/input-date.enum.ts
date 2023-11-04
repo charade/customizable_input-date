@@ -32,7 +32,7 @@ export namespace InputDateEnum {
     Years,
   }
 
-  const monthNamekey = 'input.date.month';
+  const monthNamekey = 'input.date.month.';
   export const getMonthName = new CustomMap<Month, string>([
     [Month.Jan, monthNamekey + 'jan'],
     [Month.Feb, monthNamekey + 'feb'],
