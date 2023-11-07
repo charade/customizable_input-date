@@ -27,7 +27,7 @@ export namespace InputDateEnum {
   }
 
   export enum View {
-    Dayjs = 1,
+    Week = 1,
     Months,
     Years,
   }
@@ -44,7 +44,7 @@ export namespace InputDateEnum {
     [Month.Aug, monthNamekey + 'aug'],
     [Month.Sept, monthNamekey + 'sep'],
     [Month.oct, monthNamekey + 'oct'],
-    [Month.Nov, monthNamekey + 'oct'],
+    [Month.Nov, monthNamekey + 'nov'],
     [Month.Dec, monthNamekey + 'dec'],
   ]);
 
@@ -61,7 +61,7 @@ export namespace InputDateEnum {
 
   const viewModeKey = 'input.date.';
   export const viewModeToString = new CustomMap<View, string>([
-    [View.Dayjs, viewModeKey + 'days'],
+    [View.Week, viewModeKey + 'weeks'],
     [View.Months, viewModeKey + 'months'],
     [View.Years, viewModeKey + 'years'],
   ]);

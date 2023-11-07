@@ -14,13 +14,9 @@
       margin: 0 0.19rem;
     }
 
-    .input-container,
-    .clear-icon {
-      font-size: 1rem;
-    }
-
     .input-container {
       width: 10rem;
+      font-size: 1rem;
       height: 1.5rem;
       border-radius: 0.5rem;
       border: 1px solid rgba($color: #000000, $alpha: 0.5);
@@ -32,19 +28,12 @@
       .input-field {
         font-size: 0.8rem;
         margin-left: 0.5rem;
-      }
-    }
 
-    .clear-icon {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      box-shadow: 0 0 1px;
-      border-style: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: red;
+        &.placeholder {
+          color: #00000073;
+          // font-size: 0.3rem;
+        }
+      }
     }
   }
 }
@@ -82,120 +71,175 @@
     }
   }
 
-  .date-view-mode-panel {
+  .views-panel {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1.5rem 0;
-    width: 83%;
-    min-height: 8rem;
+    height: 88%;
+    justify-content: space-between;
 
-    .chevron-left-icon,
-    .chevron-right-icon {
-      font-size: 1.25rem;
-      color: #ffffff9f;
-      cursor: pointer;
-    }
-
-    .view-mode-container {
-      width: 7rem;
-      height: 6.5rem;
-      border-radius: 50%;
-      border: 1px solid #ffffff93;
-      margin: 0 1.5rem;
-      box-shadow: -9px 8px 6px #000000b6 inset, 8px -7px 6px #ffffff75,
-        -8px 7px 6px #000000b6;
+    .date-panel {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #ffffffc0;
+      flex-direction: column;
+      padding: 0 0.5rem;
+      width: 88%;
 
-      .view-mode {
-        font-size: 1.5rem;
+      .date-view-mode-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5rem 0;
+        min-height: 8rem;
+
+        .chevron-left-icon,
+        .chevron-right-icon {
+          font-size: 1.25rem;
+          color: #ffffff9f;
+          cursor: pointer;
+        }
+
+        .view-mode-container {
+          width: 7rem;
+          height: 6.5rem;
+          border-radius: 50%;
+          border: 1px solid #ffffff93;
+          margin: 0 1.5rem;
+          box-shadow: -9px 8px 6px #000000b6 inset, 8px -7px 6px #ffffff75,
+            -8px 7px 6px #000000b6;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #ffffffc0;
+
+          .view-mode {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .date-content {
+        height: 16.5rem;
+        overflow: auto;
+
+        .week-table {
+          display: flex;
+          flex-direction: column;
+
+          .single-arrows-container {
+            display: flex;
+            justify-content: center;
+            font-size: 1rem;
+
+            & > * {
+              margin: 0 1rem;
+            }
+
+            .week-order {
+              color: #ffffffd0;
+            }
+          }
+        }
+
+        table {
+          &.months-table {
+            width: 100%;
+          }
+
+          th,
+          td {
+            text-align: center;
+            vertical-align: middle;
+
+            &.months-table {
+              width: 5rem;
+              height: 3rem;
+              font-size: 1rem;
+            }
+          }
+          th {
+            font-size: 0.8rem;
+            width: 2rem;
+            height: 2rem;
+            color: #c5bff3;
+          }
+          td {
+            position: relative;
+            width: 2rem;
+            height: 1.8rem;
+            font-size: 0.78rem;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 44%;
+
+            &.rounded-selected:not(.selected):hover {
+              background-color: #0000009a;
+              border-radius: 60%;
+            }
+
+            &.selected {
+              border: 1px solid #ffffffb4;
+            }
+
+            &:not(.rounded-selected, .selected)::before {
+              content: "";
+              position: absolute;
+              top: 80%;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 0;
+              height: 2px;
+              background-color: $smooth-purple;
+              transition: width 0.3s ease;
+              border-radius: 15px;
+              box-shadow: 0 0 2px #ffffff9b;
+            }
+
+            &.underlined-selected:hover::before {
+              width: 50%;
+            }
+
+            &.outOfMonth {
+              color: #d1d1d1e5;
+            }
+          }
+
+          tr.months-table {
+            max-height: 0;
+          }
+        }
       }
     }
-  }
 
-  .date-content {
-    width: 100%;
-    overflow: auto;
+    .time-view-panel {
+      display: flex;
+      width: 8rem;
+      margin-top: 1.5rem;
 
-    table {
-      padding: 0 2rem;
+      ul {
+        list-style: none;
+        height: 93%;
+        overflow: scroll;
+        padding: 0 1rem;
 
-      &.months-table {
-        padding: 0 2rem 0 2.5rem;
-      }
-
-      &.year-table {
-        overflow: auto;
-        padding: 0;
-      }
-
-      th,
-      td {
-        text-align: center;
-        vertical-align: middle;
-
-        &.months-table {
-          text-align: center;
-          width: 5rem;
-          height: 3rem;
-          font-size: 1rem;
+        & > * {
+          font-size: 0.9rem;
+          color: #000000a8
         }
 
-        &.years-table {
-          text-align: right;
-        }
-      }
-      th {
-        font-size: 0.8rem;
-        width: 2rem;
-        height: 2rem;
-        color: #c5bff3;
-      }
-      td {
-        position: relative;
-        width: 2rem;
-        height: 1.8rem;
-        font-size: 0.78rem;
-        color: #ffffff;
-        cursor: pointer;
-        border-radius: 44%;
-
-        &:hover:not(.years-table) {
-          background-color: #0000009a;
+        & > *:nth-child(2n + 1){
+          color: #e5e4e4a2
         }
 
-        &.years-table::before {
+        &:first-child {
+          position: relative;
+        }
+
+        &:first-child:before {
           content: "";
           position: absolute;
-          top: 80%;
-          left: 50%;
-          transform: translateX(-25%);
-          width: 0;
-          height: 2px;
-          background-color: $smooth-purple;
-          transition: width 0.3s ease;
-          border-radius: 15px;
-          box-shadow: 0 0 2px #ffffff9b;
+          top: 0;
+          left: 0;
+          border-left: 1px solid #ffffff34;
+          height: 100%;
         }
-
-        &.years-table:hover::before {
-          width: 50%;
-        }
-
-        &.outOfMonth {
-          color: #d1d1d1e5;
-        }
-
-        &.selected {
-          border: 1px solid #ffffffb4;
-        }
-      }
-
-      tr.months-table {
-        max-height: 0;
       }
     }
   }

@@ -6,7 +6,8 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app/app-routes';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateConfig } from './app/utils/translate-config';
-import { HttpBackend, provideHttpClient } from '@angular/common/http';
+import {  provideHttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 if (environment.production) {
   enableProdMode();
@@ -19,6 +20,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom([
       TranslateModule.forRoot(TranslateConfig.customTranslateConfig),
     ]),
+    importProvidersFrom([BrowserAnimationsModule]),
     { provide: TranslateConfig.TRANSLATE_FILES_LOADER, useValue: [] },
   ],
 });

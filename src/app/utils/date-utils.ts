@@ -1,6 +1,8 @@
 import * as dayjs from 'dayjs';
 import { Language } from './languages';
+import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 
+dayjs.extend(weekOfYear);
 dayjs.locale('en');
 
 export namespace DateUtils {
@@ -43,24 +45,25 @@ export namespace DateUtils {
     return isValidDate(date) && dayjs(date).format(format || 'DD/MM/YYY HH:MM');
   };
 
-  const formaDateUnit = (unit: number): string => {
+  export const formaDateUnit = (unit: number): string => {
     return `${unit < 10 ? '0' + unit : unit}`;
   };
 
   export const formatDate = (
-    date: dayjs.Dayjs,
+    selectedDate: dayjs.Dayjs,
     locale: string,
     displayTime?: boolean
   ): string => {
-    const month = formaDateUnit(date.month());
-    const hours = formaDateUnit(date.hour());
-    const minutes = formaDateUnit(date.minute());
+    const month = formaDateUnit(selectedDate.month() + 1); // range month from 1-12
+    const monthDay = formaDateUnit(selectedDate.date());
+    const hours = formaDateUnit(selectedDate.hour());
+    const minutes = formaDateUnit(selectedDate.minute());
 
     return Language.convertLocalToLang.value(locale) === Language.Fr
-      ? `${date.date()}/ ${month}/ ${date.year()} - ${
+      ? `${monthDay}/ ${month}/ ${selectedDate.year()} - ${
           displayTime && hours + ' : ' + minutes
         } `
-      : `${date.year()}/ ${month}/ ${date.date()} - ${
+      : `${selectedDate.year()}/ ${month}/ ${monthDay} - ${
           displayTime && hours + ' : ' + minutes
         }`;
   };

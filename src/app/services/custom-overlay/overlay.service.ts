@@ -1,12 +1,7 @@
 import { Injectable, OnDestroy, TemplateRef, inject } from '@angular/core';
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import {
-  ComponentPortal,
-  ComponentType,
-  TemplatePortal,
-} from '@angular/cdk/portal';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
-
 import { OverlayUtils } from './overlay.config';
 
 @Injectable()
@@ -28,7 +23,6 @@ export class CustomOverlayService implements OnDestroy {
     overlayContent: TemplateRef<any>,
     overlayData?: OverlayUtils.DataConfig
   ): void {
-
     const overlayConfig = {
       ...OverlayUtils.DEFAULT_CONFIG(this.overlay, overlayData.origin),
       ...overlayData.config,

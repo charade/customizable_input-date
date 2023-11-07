@@ -56,8 +56,6 @@ export namespace OverlayUtils {
               originY: 'top',
               overlayX: 'start',
               overlayY: 'top',
-              offsetY: 15,
-              offsetX: -15,
             },
           ])
       : overlay.position().global().centerHorizontally().centerVertically(),

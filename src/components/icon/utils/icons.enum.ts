@@ -7,8 +7,11 @@ import {
   faArrowLeft,
   faArrowRight,
   faCalendar,
+  faCalendarPlus,
   faChevronLeft,
   faChevronRight,
+  faCircleMinus,
+  faCirclePlus,
   faCog,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
@@ -17,8 +20,8 @@ export enum IconsEnum {
   Calendar = 1,
   Trash,
   Settings,
-  ArrowLeft,
-  ArrowRight,
+  CircleMinus,
+  CirclePlus,
   AngleLeft,
   AngleRight,
 }
@@ -28,7 +31,8 @@ export namespace IconsEnum {
     [IconsEnum.Calendar, faCalendar],
     [IconsEnum.Trash, faTrashAlt],
     [IconsEnum.Settings, faCog],
-    [IconsEnum.ArrowLeft, faArrowLeft],
+    [IconsEnum.CircleMinus, faCircleMinus],
+    [IconsEnum.CirclePlus, faCirclePlus],
     [IconsEnum.AngleLeft, faAngleDoubleLeft],
     [IconsEnum.AngleRight, faAngleDoubleRight],
   ]);

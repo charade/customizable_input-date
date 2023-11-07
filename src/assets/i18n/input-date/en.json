@@ -1,9 +1,10 @@
 {
-  "input.field.placeholder": "YYYY/MM/DD",
+  "input.date.placeholder": "yyyy/mm/dd -- hh:mm",
   "input.date.close": "Close",
   "input.date.clear": "Clear",
   "input.date.today": "Today",
-  "input.date.days": "Days",
+  "input.date.weeks": "Weeks",
+  "input.date.week.of.year": "Week {{ week }}",
   "input.date.months": "Months",
   "input.date.years": "Years",
   "input.date.month.jan": "Jan",
