@@ -5,7 +5,6 @@
 
   .date-picker-overlay {
     height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,13 +13,14 @@
 
     .calendar-header {
       height: 2rem;
-      width: 100%;
+      width: 92%;
       max-height: 2rem;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       padding: 1rem;
       background-color: $smooth-purple;
+      border-radius: 12px 12px 0 0;
 
       & > * {
         font-size: 1rem;
@@ -151,6 +151,7 @@
                 .tooltip {
                   z-index: 20;
                   position: absolute;
+                  color: #ffffffb0;
                   background-color: #000000;
                   top: -100%;
                   left: 80%;
@@ -212,6 +213,7 @@
 
               &.isHolyday {
                 background-color: $info;
+                color: #000000a9;
               }
             }
 
@@ -228,10 +230,19 @@
         margin-top: 0.9rem;
 
         ul {
+          position: relative;
           list-style: none;
           height: 90%;
-          overflow: scroll;
+          overflow: auto;
           padding: 0 1rem;
+
+          &:first-child {
+            border-left: 1px solid #ffffff34;
+          }
+
+          & > *:nth-child(2n + 1) {
+            color: #e5e4e4d5;
+          }
 
           & > * {
             font-size: 1rem;
@@ -249,23 +260,6 @@
             &.selected {
               border: 1px solid #ffffffd3;
             }
-          }
-
-          & > *:nth-child(2n + 1) {
-            color: #e5e4e4d5;
-          }
-
-          &:first-child {
-            position: relative;
-          }
-
-          &:first-child:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-left: 1px solid #ffffff34;
-            height: 100%;
           }
         }
       }

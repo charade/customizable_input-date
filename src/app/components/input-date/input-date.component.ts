@@ -80,7 +80,7 @@ export class InputDateComponent implements OnInit, ControlValueAccessor {
         origin: this.popoverOrigin,
         scrollStrategy: ScrollStrategyEnum.Block,
         viewContainerRef: this.viewContainerRef,
-        config: { width: '22rem', height: '31.5rem', hasBackdrop: true },
+        config: { width: '25rem', height: '31.5rem', hasBackdrop: true },
         data: {
           selectedDate: this.selectedDate,
           locale: this.locale(),

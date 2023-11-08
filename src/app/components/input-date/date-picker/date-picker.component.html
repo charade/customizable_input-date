@@ -175,6 +175,7 @@
       <ul>
         <li
           *ngFor="let hour of hoursField"
+          [id]="'hour-id-' + hour"
           [class.selected]="hour === selectedHours()"
           (click)="setHours(hour)"
         >
@@ -184,6 +185,7 @@
       <ul>
         <li
           *ngFor="let minute of minutesField"
+          [id]="'minute-id-' + minute"
           [class.selected]="minute === selectedMinutes()"
           (click)="setMinutes(minute)"
         >

@@ -1,9 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   OnInit,
-  TemplateRef,
   ViewChild,
   WritableSignal,
   computed,
@@ -59,6 +57,14 @@ export class DatePickerComponent implements OnInit {
     window.document
       .querySelector(`#year-id-${this.selectedYear()}`)
       ?.scrollIntoView({ block: 'center' });
+
+    window.document
+      .querySelector(`#hour-id-${this.selectedHours()}`)
+      .scrollIntoView();
+
+    window.document
+      .querySelector(`#minute-id-${this.selectedMinutes()}`)
+      .scrollIntoView();
   }
 
   @ViewChild('popoverOrigin', { read: Element })
@@ -98,11 +104,15 @@ export class DatePickerComponent implements OnInit {
   );
 
   monthsTableFakeHeaders = range(0, 4).map((value: number) => value.toString());
-  selectedMonth = computed(() => (this.selectedDate() || dayjs()).month() + 1); // display month range to feet 1-12
+  readonly selectedMonth = computed(
+    () => (this.selectedDate() || dayjs()).month() + 1
+  ); // display month range to feet 1-12
 
   yearsDataSource$ = new BehaviorSubject(DatePickerUtils.generateYears());
   yearsTableFakeHeaders = range(0, 7).map((value: number) => value.toString());
-  selectedYear = computed(() => (this.selectedDate() || dayjs()).year());
+  readonly selectedYear = computed(() =>
+    (this.selectedDate() || dayjs()).year()
+  );
 
   // slideViewLabelAnimationState: WritableSignal<InputDateAnimationsEnum> =
   //   signal(InputDateAnimationsEnum.SlideLeftStart);
