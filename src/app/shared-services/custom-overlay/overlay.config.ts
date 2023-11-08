@@ -5,7 +5,14 @@ import {
   OverlayConfig,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ElementRef, InjectionToken, ViewContainerRef } from '@angular/core';
+import {
+  ElementRef,
+  InjectionToken,
+  ViewContainerRef,
+  WritableSignal,
+} from '@angular/core';
+import { Dayjs } from 'dayjs';
+import { Language } from 'src/app/utils/languages';
 import { CustomMap } from 'src/app/utils/struct-utils';
 
 export enum ScrollStrategyEnum {
@@ -15,9 +22,9 @@ export enum ScrollStrategyEnum {
   Close,
 }
 export namespace OverlayUtils {
-  export const OVERLAY_DATA_TOKEN = new InjectionToken<DataConfig>(
-    'data_token'
-  );
+  export function OVERLAY_DATA_TOKEN<T>() {
+    return new InjectionToken<T>('data_token');
+  }
 
   export const getScrollStrategy = (overlay: Overlay) =>
     new CustomMap<ScrollStrategyEnum, ScrollStrategy>(
@@ -33,14 +40,15 @@ export namespace OverlayUtils {
     config?: OverlayConfig;
     customData?: T;
     afterCloseEvent?: () => void;
-    origin?: ElementRef<any>;
+    origin?: Element;
     scrollStrategy?: ScrollStrategyEnum;
     viewContainerRef?: ViewContainerRef;
+    data?: T;
   }
 
   export const DEFAULT_CONFIG = (
     overlay: Overlay,
-    origin: ElementRef<any>
+    origin: Element
   ): OverlayConfig => ({
     width: '10rem',
     height: '10rem',
@@ -52,10 +60,11 @@ export namespace OverlayUtils {
           .flexibleConnectedTo(origin)
           .withPositions([
             {
-              originX: 'end',
-              originY: 'top',
-              overlayX: 'start',
+              originX: 'center',
+              originY: 'bottom',
+              overlayX: 'center',
               overlayY: 'top',
+              offsetY: 3,
             },
           ])
       : overlay.position().global().centerHorizontally().centerVertically(),

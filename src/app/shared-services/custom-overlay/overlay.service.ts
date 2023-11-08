@@ -1,8 +1,16 @@
-import { Injectable, OnDestroy, TemplateRef, inject } from '@angular/core';
+import {
+  Injectable,
+  Injector,
+  OnDestroy,
+  TemplateRef,
+  WritableSignal,
+  inject,
+} from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { OverlayUtils } from './overlay.config';
+import { Dayjs } from 'dayjs';
 
 @Injectable()
 export class CustomOverlayService implements OnDestroy {
@@ -11,7 +19,6 @@ export class CustomOverlayService implements OnDestroy {
   private currentOverlayRef: OverlayRef;
   private subscription: Subscription;
   private overlay = inject(Overlay);
-
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -19,9 +26,9 @@ export class CustomOverlayService implements OnDestroy {
     this.currentOverlayRef.detach();
   }
 
-  open(
-    overlayContent: TemplateRef<any>,
-    overlayData?: OverlayUtils.DataConfig
+  open<T>(
+    overlayContent: ComponentType<any>,
+    overlayData?: OverlayUtils.DataConfig<T>
   ): void {
     const overlayConfig = {
       ...OverlayUtils.DEFAULT_CONFIG(this.overlay, overlayData.origin),
@@ -33,9 +40,19 @@ export class CustomOverlayService implements OnDestroy {
 
     const overlayRef = this.overlay.create(overlayConfig);
 
-    const portal = new TemplatePortal(
-      overlayContent as TemplateRef<any>,
-      overlayData.viewContainerRef
+    const injector = Injector.create({
+      providers: [
+        {
+          provide: OverlayUtils.OVERLAY_DATA_TOKEN,
+          useValue: overlayData.data,
+        },
+      ],
+    });
+
+    const portal = new ComponentPortal(
+      overlayContent as ComponentType<any>,
+      overlayData.viewContainerRef,
+      injector
     );
 
     overlayRef.attach(portal);

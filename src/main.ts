@@ -1,13 +1,17 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { appRoutes } from './app/app-routes';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateConfig } from './app/utils/translate-config';
-import {  provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideComponentStore } from '@ngrx/component-store';
+
+import { environment } from './environments/environment';
+
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app-routes';
+import { TranslateConfig } from './app/utils/translate-config';
+import { InputDateStore } from './app/components/input-date/services/input-date.store';
 
 if (environment.production) {
   enableProdMode();
@@ -16,6 +20,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
+    provideComponentStore(InputDateStore),
     provideRouter(appRoutes, withComponentInputBinding()),
     importProvidersFrom([
       TranslateModule.forRoot(TranslateConfig.customTranslateConfig),

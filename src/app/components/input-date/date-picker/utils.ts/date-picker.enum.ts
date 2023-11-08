@@ -1,6 +1,6 @@
 import { CustomMap } from 'src/app/utils/struct-utils';
 
-export namespace InputDateEnum {
+export namespace DatePickerEnum {
   export enum Month {
     Jan = 1,
     Feb,
@@ -31,6 +31,33 @@ export namespace InputDateEnum {
     Months,
     Years,
   }
+
+  export enum HolydaysEnum {
+    NewYearDay = '1er janvier',
+    MayoFirst = '1er mai',
+    MayoEight = '8 mai',
+    Ascension = 'Ascension',
+    Pentecost = 'Lundi de Pentecôte',
+    July14 = '14 juillet',
+    Assumption = 'Assomption',
+    Toussaint = 'Toussaint',
+    November11 = '11 novembre',
+    Christmas = 'Jour de Noël',
+  }
+
+  const holydayKey = 'input.date.holydays.';
+  export const translateHolyday = new CustomMap<HolydaysEnum, string>([
+    [HolydaysEnum.NewYearDay, holydayKey + 'newYearDay'],
+    [HolydaysEnum.MayoFirst, holydayKey + 'mayFirst'],
+    [HolydaysEnum.MayoEight, holydayKey + 'mayEight'],
+    [HolydaysEnum.Ascension, holydayKey + 'ascension'],
+    [HolydaysEnum.Pentecost, holydayKey + 'pentecost'],
+    [HolydaysEnum.July14, holydayKey + 'july14'],
+    [HolydaysEnum.Assumption, holydayKey + 'assumption'],
+    [HolydaysEnum.Toussaint, holydayKey + 'toussaint'],
+    [HolydaysEnum.November11, holydayKey + 'november11'],
+    [HolydaysEnum.Christmas, holydayKey + 'christmas'],
+  ]);
 
   const monthNamekey = 'input.date.month.';
   export const getMonthName = new CustomMap<Month, string>([

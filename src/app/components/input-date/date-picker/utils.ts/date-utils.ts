@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
-import { Language } from './languages';
+import { Language } from '../../../../utils/languages';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 
 dayjs.extend(weekOfYear);
@@ -7,6 +7,10 @@ dayjs.locale('en');
 
 export namespace DateUtils {
   type DateType = string | dayjs.Dayjs | Date;
+
+  export enum FormatEnum {
+    En_Date = 'YYYY-MM-DD',
+  }
 
   export const isValidDate = (date: DateType): boolean => {
     return dayjs(date).isValid();
@@ -51,8 +55,7 @@ export namespace DateUtils {
 
   export const formatDate = (
     selectedDate: dayjs.Dayjs,
-    locale: string,
-    displayTime?: boolean
+    locale: string
   ): string => {
     const month = formaDateUnit(selectedDate.month() + 1); // range month from 1-12
     const monthDay = formaDateUnit(selectedDate.date());
@@ -61,10 +64,10 @@ export namespace DateUtils {
 
     return Language.convertLocalToLang.value(locale) === Language.Fr
       ? `${monthDay}/ ${month}/ ${selectedDate.year()} - ${
-          displayTime && hours + ' : ' + minutes
+          hours + ' : ' + minutes
         } `
       : `${selectedDate.year()}/ ${month}/ ${monthDay} - ${
-          displayTime && hours + ' : ' + minutes
+          hours + ' : ' + minutes
         }`;
   };
 }

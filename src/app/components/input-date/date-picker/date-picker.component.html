@@ -1,0 +1,195 @@
+<div class="date-picker-overlay">
+  <!-- header actions buttons -->
+  <div class="calendar-header">
+    <span (click)="today()"> {{ "input.date.today" | translate }}</span>
+    <span (click)="clearDate()" class="">
+      {{ "input.date.clear" | translate }}</span
+    >
+  </div>
+
+  <!-- date && time fields -->
+  <div class="views-panel">
+    <div class="date-panel">
+      <!-- View mode weeks/month/years -->
+      <div class="date-view-mode-panel">
+        <div class="chevron-left-icon">
+          <app-icon
+            [name]="IconsEnum.AngleLeft"
+            (click)="swipeViewOnDoubleArrowClick(-1)"
+          />
+        </div>
+        <div class="view-mode-container">
+          <h1 class="view-mode">
+            {{ DatePickerEnum.viewModeToString.value(viewMode()) | translate }}
+          </h1>
+        </div>
+        <div class="chevron-right-icon">
+          <app-icon
+            [name]="IconsEnum.AngleRight"
+            (click)="swipeViewOnDoubleArrowClick(1)"
+          />
+        </div>
+      </div>
+
+      <!-- Warning displayed when selected day is holidays -->
+      <div
+        *ngIf="viewMode() !== DatePickerEnum.View.Week && selectedDateInfo()"
+        class="holidays-warning-panel"
+      >
+        <app-icon [name]="IconsEnum.Warning" />
+        <span>{{
+          DatePickerEnum.translateHolyday.value(selectedDateInfo()) | translate
+        }}</span>
+      </div>
+
+      <!-- date view content -->
+
+      <div class="date-content" #yearsTable>
+        <div *ngIf="viewMode() === DatePickerEnum.View.Week" class="week-table">
+          <div class="single-arrows-container">
+            <app-icon
+              [name]="IconsEnum.CircleMinus"
+              (click)="swipeWeeksOnArrowClick(-1)"
+            />
+            <span class="week-order">{{
+              "input.date.week.of.year"
+                | translate : { week: currentWeekOfYear() }
+            }}</span>
+            <app-icon
+              [name]="IconsEnum.CirclePlus"
+              (click)="swipeWeeksOnArrowClick(1)"
+            />
+          </div>
+
+          <!-- weeks view -->
+          <table class="days-table" cdk-table [dataSource]="weekDataSource$">
+            <ng-container
+              *ngFor="let headerName of weekTableColumns; let column = index"
+              [cdkColumnDef]="headerName"
+            >
+              <th cdk-header-cell *cdkHeaderCellDef>
+                <span>
+                  {{ headerName | translate }}
+                </span>
+              </th>
+              <td
+                class="rounded-selected"
+                cdk-cell
+                *cdkCellDef="let day"
+                [ngClass]="{
+                  outOfMonth: day[column]?.swipeMonth,
+                  selected: day[column]?.isSelected,
+                  isHolyday: day[column]?.info
+                }"
+                (click)="!day[column]?.isSelected && setDay(day[column])"
+              >
+                <span>
+                  {{ day[column]?.value }}
+                </span>
+                <span class="tooltip">{{
+                  DatePickerEnum.translateHolyday.value(day[column]?.info)
+                    | translate
+                }}</span>
+              </td>
+            </ng-container>
+            <cdk-header-row
+              *cdkHeaderRowDef="weekTableColumns"
+            ></cdk-header-row>
+            <cdk-row *cdkRowDef="let row; columns: weekTableColumns"></cdk-row>
+          </table>
+        </div>
+
+        <!-- months table -->
+        <table
+          *ngIf="viewMode() === DatePickerEnum.View.Months"
+          class="months-table"
+          cdk-table
+          [dataSource]="monthsDataSource$"
+        >
+          <ng-container
+            *ngFor="
+              let fakeHeader of monthsTableFakeHeaders;
+              let column = index
+            "
+            [cdkColumnDef]="fakeHeader"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef></th>
+            <td
+              class="rounded-selected months-table"
+              [class.selected]="month[column]?.value === selectedMonth()"
+              cdk-cell
+              *cdkCellDef="let month"
+              (click)="
+                month[column]?.value !== selectedMonth() &&
+                  setMonth(month[column]?.value)
+              "
+            >
+              <span>
+                {{ month[column]?.label | translate }}
+              </span>
+            </td>
+          </ng-container>
+          <tr
+            cdk-header-row
+            class="months-table"
+            *cdkHeaderRowDef="monthsTableFakeHeaders"
+          ></tr>
+          <tr
+            cdk-row
+            *cdkRowDef="let row; columns: monthsTableFakeHeaders"
+          ></tr>
+        </table>
+
+        <!-- years table -->
+        <table
+          *ngIf="viewMode() === DatePickerEnum.View.Years"
+          cdk-table
+          [dataSource]="yearsDataSource$"
+        >
+          <ng-container
+            *ngFor="let year of yearsTableFakeHeaders; let column = index"
+            [cdkColumnDef]="year"
+          >
+            <th cdk-header-cell *cdkHeaderCellDef></th>
+            <td
+              [id]="'year-id-' + year[column]?.value"
+              class="underlined-selected years-table"
+              [class.selected]="year[column]?.value === selectedYear()"
+              cdk-cell
+              *cdkCellDef="let year"
+              (click)="
+                year[column]?.value !== selectedYear() &&
+                  setYear(year[column]?.value)
+              "
+            >
+              <span>{{ year[column]?.value }}</span>
+            </td>
+          </ng-container>
+          <tr cdk-header-row *cdkHeaderRowDef="yearsTableFakeHeaders"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: yearsTableFakeHeaders"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="time-view-panel">
+      <ul>
+        <li
+          *ngFor="let hour of hoursField"
+          [class.selected]="hour === selectedHours()"
+          (click)="setHours(hour)"
+        >
+          {{ hour }}
+        </li>
+      </ul>
+      <ul>
+        <li
+          *ngFor="let minute of minutesField"
+          [class.selected]="minute === selectedMinutes()"
+          (click)="setMinutes(minute)"
+        >
+          {{ minute }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

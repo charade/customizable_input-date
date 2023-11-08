@@ -14,6 +14,7 @@ import {
   faCirclePlus,
   faCog,
   faTrashAlt,
+  faWarning,
 } from '@fortawesome/free-solid-svg-icons';
 
 export enum IconsEnum {
@@ -24,6 +25,7 @@ export enum IconsEnum {
   CirclePlus,
   AngleLeft,
   AngleRight,
+  Warning,
 }
 
 export namespace IconsEnum {
@@ -35,5 +37,6 @@ export namespace IconsEnum {
     [IconsEnum.CirclePlus, faCirclePlus],
     [IconsEnum.AngleLeft, faAngleDoubleLeft],
     [IconsEnum.AngleRight, faAngleDoubleRight],
+    [IconsEnum.Warning, faWarning],
   ]);
 }

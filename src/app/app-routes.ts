@@ -9,7 +9,7 @@ export const appRoutes: Routes = [
   {
     path: AppPathsEnum.Components,
     loadChildren: () =>
-      import('../components/components.module').then((c) => c.ComponentsModule),
+      import('./components/components.module').then((c) => c.ComponentsModule),
   },
   { path: '**', redirectTo: AppPathsEnum.Components, pathMatch: 'full' },
 ];

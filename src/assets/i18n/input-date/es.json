@@ -25,5 +25,15 @@
   "input.date.weekDay.thu": "Jue",
   "input.date.weekDay.fri": "Vie",
   "input.date.weekDay.sat": "Sáb",
-  "input.date.weekDay.sun": "Dom"
+  "input.date.weekDay.sun": "Dom",
+  "input.date.holydays.newYearDay": "Año Nuevo",
+  "input.date.holydays.mayFirst": "1 de Mayo",
+  "input.date.holydays.mayEight": "8 de Mayo",
+  "input.date.holydays.ascension": "Ascensión",
+  "input.date.holydays.pentecost": "Lunes de Pentecostés",
+  "input.date.holydays.july14": "14 de Julio",
+  "input.date.holydays.assumption": "Suposición",
+  "input.date.holydays.toussaint": "Toussaint",
+  "input.date.holydays.november11": "11 de Noviembre",
+  "input.date.holydays.christmas": "Día de Navidad"
 }

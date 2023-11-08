@@ -1,0 +1,6 @@
+<div #popoverOrigin class="input-container" (click)="openDatePickerOnClick()">
+  <span class="input-field">{{
+    displayedDate() || "input.date.placeholder" | translate
+  }}</span>
+  <app-icon [name]="IconsEnum.Calendar" />
+</div>
