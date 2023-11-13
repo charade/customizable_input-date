@@ -3,14 +3,14 @@ import { Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { CustomOverlayService } from 'src/app/components/input-date/custom-overlay/overlay.service';
+import { CustomOverlayService } from 'src/app/components/input-date/services/custom-overlay/overlay.service';
 import { IconsEnum } from '../../icon/utils/icons.enum';
 
 import { IconComponent } from '../../icon/icon.component';
 import { ButtonGroupComponent } from '../../button-group/button-group.component';
 
 import { Language } from 'src/app/utils/languages';
-import { InputDateStore } from '../services/input-date.store';
+import { InputDateStore } from '../services/input-date.store/input-date.store.index';
 import { DateUtils } from '../date-picker/utils.ts/date-utils';
 
 @Component({

@@ -60,17 +60,17 @@
           }
 
           .view-mode-circle {
-            width: 6rem;
-            height: 6rem;
-            border-radius: 50%;
-            border: 1px solid #ffffff93;
-            margin: 0 1.5rem;
-            box-shadow: -9px 8px 6px #000000b6 inset, 8px -7px 6px #ffffff75,
-              -8px 7px 6px #000000b6;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 6rem;
+            height: 6rem;
+            margin: 0 1rem;
+            border: 1px solid #ffffff93;
+            border-radius: 50%;
             color: #ffffffc0;
+            box-shadow: -9px 8px 6px #000000b6 inset, 8px -7px 6px #ffffff75,
+              -8px 7px 6px #000000b6;
 
             .view-mode {
               font-size: 1rem;
@@ -94,7 +94,6 @@
 
         .date-content {
           height: 15rem;
-          overflow: scroll;
 
           .week-table {
             display: flex;

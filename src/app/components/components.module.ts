@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { appRoutes } from 'src/app/app-routes';
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslateConfig } from 'src/app/utils/translate-config';
 
 export enum ComponentsPathEnum {
@@ -17,7 +16,7 @@ const componentsRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: `${appRoutes}/ ${ComponentsPathEnum.InputDate}`,
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];

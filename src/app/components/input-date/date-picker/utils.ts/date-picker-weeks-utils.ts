@@ -50,8 +50,7 @@ export namespace DatePickerWeekUtils {
       daysDataSource.push(displayedDays.splice(0, 7));
     }
 
-    /** displaying the week/days table in 7x5 */
-    return daysDataSource.splice(0, 6);
+    return daysDataSource;
   };
 
   const generatePastMonthDays = (

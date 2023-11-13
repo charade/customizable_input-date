@@ -16,10 +16,10 @@ import { map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 
 import { IconComponent } from '../icon/icon.component';
-import { CustomOverlayService } from './custom-overlay/overlay.service';
+import { CustomOverlayService } from './services/custom-overlay/overlay.service';
 
 import { IconsEnum } from '../icon/utils/icons.enum';
-import { ScrollStrategyEnum } from 'src/app/components/input-date/custom-overlay/overlay.config';
+import { ScrollStrategyEnum } from 'src/app/components/input-date/services/custom-overlay/overlay.config';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { DatePickerEnum } from './date-picker/utils.ts/date-picker.enum';
 import { DateUtils } from './date-picker/utils.ts/date-utils';
@@ -27,7 +27,7 @@ import { DatePickerUtils } from './date-picker/utils.ts/date-picker-utils.index'
 import { InputDateSettingsComponent } from './input-date-settings/input-date-settings';
 import { CustomControlValueAccessor } from 'src/app/utils/custom-control-value-accessor';
 import { Language } from 'src/app/utils/languages';
-import { InputDateStore } from './services/input-date.store';
+import { InputDateStore } from './services/input-date.store/input-date.store.index';
 
 @Component({
   selector: 'app-input-date',

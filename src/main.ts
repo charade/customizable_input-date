@@ -11,7 +11,7 @@ import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app-routes';
 import { TranslateConfig } from './app/utils/translate-config';
-import { InputDateStore } from './app/components/input-date/services/input-date.store';
+import { InputDateStore } from './app/components/input-date/services/input-date.store/input-date.store.index';
 
 if (environment.production) {
   enableProdMode();

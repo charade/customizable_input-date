@@ -19,7 +19,7 @@ import { range } from 'lodash';
 import * as dayjs from 'dayjs';
 
 import { IconComponent } from '../../icon/icon.component';
-import { CustomOverlayService } from 'src/app/components/input-date/custom-overlay/overlay.service';
+import { CustomOverlayService } from 'src/app/components/input-date/services/custom-overlay/overlay.service';
 
 import { IconsEnum } from '../../icon/utils/icons.enum';
 import { DatePickerEnum } from './utils.ts/date-picker.enum';
@@ -27,7 +27,7 @@ import { DatePickerEnum } from './utils.ts/date-picker.enum';
 import { DateUtils } from './utils.ts/date-utils';
 import { DatePickerUtils } from './utils.ts/date-picker-utils.index';
 import { DatePickerWeekUtils } from './utils.ts/date-picker-weeks-utils';
-import { OverlayUtils } from 'src/app/components/input-date/custom-overlay/overlay.config';
+import { OverlayUtils } from 'src/app/components/input-date/services/custom-overlay/overlay.config';
 import { DatePickerYearUtils } from './utils.ts/date-picker-years-utils';
 import { DatePickerMonthsUtils } from './utils.ts/date-picker-months-utils';
 
