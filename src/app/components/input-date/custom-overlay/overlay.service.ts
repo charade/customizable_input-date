@@ -1,16 +1,8 @@
-import {
-  Injectable,
-  Injector,
-  OnDestroy,
-  TemplateRef,
-  WritableSignal,
-  inject,
-} from '@angular/core';
+import { Injectable, Injector, OnDestroy, inject } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { OverlayUtils } from './overlay.config';
-import { Dayjs } from 'dayjs';
 
 @Injectable()
 export class CustomOverlayService implements OnDestroy {
@@ -19,6 +11,7 @@ export class CustomOverlayService implements OnDestroy {
   private currentOverlayRef: OverlayRef;
   private subscription: Subscription;
   private overlay = inject(Overlay);
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -26,7 +19,7 @@ export class CustomOverlayService implements OnDestroy {
     this.currentOverlayRef.detach();
   }
 
-  open<T>(
+  open<T = {}>(
     overlayContent: ComponentType<any>,
     overlayData?: OverlayUtils.DataConfig<T>
   ): void {
@@ -45,6 +38,10 @@ export class CustomOverlayService implements OnDestroy {
         {
           provide: OverlayUtils.OVERLAY_DATA_TOKEN,
           useValue: overlayData.data,
+        },
+        {
+          provide: OverlayRef,
+          useValue: overlayRef,
         },
       ],
     });
@@ -67,6 +64,7 @@ export class CustomOverlayService implements OnDestroy {
   close(): void {
     if (this.currentOverlayRef) {
       this.currentOverlayRef.dispose();
+      this.currentOverlayRef.detach();
       this.afterCloseEvent && this.afterCloseEvent();
     }
   }

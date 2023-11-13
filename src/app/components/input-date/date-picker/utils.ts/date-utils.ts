@@ -9,8 +9,19 @@ export namespace DateUtils {
   type DateType = string | dayjs.Dayjs | Date;
 
   export enum FormatEnum {
-    En_Date = 'YYYY-MM-DD',
+    YYYY_MM_DD_hh_mm = 'YYYY-MM-DD -- HH:mm',
+    YYYY__MM__DD_hh_mm = 'YYYY/ MM/ DD -- HH:mm ',
+    DD_MM_YYYY_hh_mm = 'DD-MM-YYYY -- HH:mm',
+    DD__MM__YYYY_hh_mm = 'DD/ MM/ YYYY -- HH:mm',
+    En_DateOnly = 'YYYY/MM/DD'
   }
+
+  export const settingsDateFormats = [
+    FormatEnum.YYYY_MM_DD_hh_mm,
+    FormatEnum.YYYY__MM__DD_hh_mm,
+    FormatEnum.DD_MM_YYYY_hh_mm,
+    FormatEnum.DD__MM__YYYY_hh_mm,
+  ].map((value) => ({ value }));
 
   export const isValidDate = (date: DateType): boolean => {
     return dayjs(date).isValid();
@@ -51,23 +62,5 @@ export namespace DateUtils {
 
   export const formaDateUnit = (unit: number): string => {
     return `${unit < 10 ? '0' + unit : unit}`;
-  };
-
-  export const formatDate = (
-    selectedDate: dayjs.Dayjs,
-    locale: string
-  ): string => {
-    const month = formaDateUnit(selectedDate.month() + 1); // range month from 1-12
-    const monthDay = formaDateUnit(selectedDate.date());
-    const hours = formaDateUnit(selectedDate.hour());
-    const minutes = formaDateUnit(selectedDate.minute());
-
-    return Language.convertLocalToLang.value(locale) === Language.Fr
-      ? `${monthDay}/ ${month}/ ${selectedDate.year()} - ${
-          hours + ' : ' + minutes
-        } `
-      : `${selectedDate.year()}/ ${month}/ ${monthDay} - ${
-          hours + ' : ' + minutes
-        }`;
   };
 }

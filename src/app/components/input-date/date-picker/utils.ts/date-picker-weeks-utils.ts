@@ -1,22 +1,13 @@
 import * as dayjs from 'dayjs';
 import { range } from 'lodash';
-import { DateUtils } from 'src/app/components/input-date/date-picker/utils.ts/date-utils';
-import { DatePickerUtils } from './date-picker-utils';
+import { DatePickerUtils } from './date-picker-utils.index';
+import { DateUtils } from './date-utils';
 
 export namespace DatePickerWeekUtils {
-  /** uniqueness helper */
-  export const getDayId = (
-    year: number,
-    month: number,
-    monthDay: number
-  ): string => dayjs(`${year}-${month}-${monthDay}`).format('YYYY-MM-DD');
-
   export const generateDaysOfMonth = (
-    _selectedDate: dayjs.Dayjs,
-    holydays: DatePickerUtils.HolydaysType
+    _selectedDate: dayjs.Dayjs
   ): DatePickerUtils.Day[][] => {
     const selectedDate = _selectedDate || dayjs();
-
     /** if month started on Sunday(equals 0) turn it to range (1, 7) */
     let firstWeekDayOfTheMonth = selectedDate.startOf('month').day();
     firstWeekDayOfTheMonth =
@@ -47,10 +38,11 @@ export namespace DatePickerWeekUtils {
       );
     }
 
-    /** settings holidays tooltip label */
+    /** styling selected day */
     displayedDays = displayedDays.map((day) => ({
       ...day,
-      info: holydays[day.id],
+      isSelected:
+        day.id === selectedDate.format(DateUtils.FormatEnum.En_DateOnly),
     }));
 
     /** divide week days to display into 7 columns table*/
@@ -59,66 +51,57 @@ export namespace DatePickerWeekUtils {
     }
 
     /** displaying the week/days table in 7x5 */
-    return daysDataSource.splice(0, 5);
-  };
-
-  const generateCurrentMonthDays = (
-    selectedDate: dayjs.Dayjs
-  ): DatePickerUtils.Day[] => {
-    return range(1, selectedDate.daysInMonth() + 1).map(
-      (monthDay: number): DatePickerUtils.Day => {
-        const month = selectedDate.month() + 1;
-        const year = selectedDate.year();
-        const id = getDayId(year, month, monthDay);
-
-        return {
-          id,
-          value: monthDay,
-          isSelected: id === selectedDate.format(DateUtils.FormatEnum.En_Date),
-        };
-      }
-    );
+    return daysDataSource.splice(0, 6);
   };
 
   const generatePastMonthDays = (
     selectedDate: dayjs.Dayjs,
     firstWeekDayOfTheMonth: number
   ): DatePickerUtils.Day[] => {
+    /** helps to know the last visible months days in calendar
+     * then we subtract to fill the calendar
+     * if current month not starting on a Monday
+     */
     const daysInLastMonth = selectedDate.subtract(1, 'month').daysInMonth();
     return range(
       // filling the current week with pastMonthLastDay - diffWeekDays With current month
       daysInLastMonth - firstWeekDayOfTheMonth + 2,
       daysInLastMonth + 1
-    ).map((monthDay: number): DatePickerUtils.Day => {
-      const month = selectedDate.month();
-      const year = selectedDate.year();
-      const id = getDayId(year, month, monthDay);
-      return {
-        id,
+    ).map(
+      (monthDay: number): DatePickerUtils.Day => ({
+        id: selectedDate
+          .subtract(1, 'month')
+          .set('date', monthDay)
+          .format(DateUtils.FormatEnum.En_DateOnly),
         swipeMonth: -1,
         value: monthDay,
-        /** checking uniqueness */
-        isSelected: id === selectedDate.format(DateUtils.FormatEnum.En_Date),
-      };
-    });
+      })
+    );
   };
+
+  const generateCurrentMonthDays = (
+    selectedDate: dayjs.Dayjs
+  ): DatePickerUtils.Day[] =>
+    range(1, selectedDate.daysInMonth() + 1).map(
+      (monthDay: number): DatePickerUtils.Day => ({
+        id: selectedDate
+          .set('date', monthDay)
+          .format(DateUtils.FormatEnum.En_DateOnly),
+        value: monthDay,
+      })
+    );
 
   const generateNextMonthDays = (
     selectedDate: dayjs.Dayjs,
     lastWeekDayOfTheMonth
-  ) => {
-    return range(1, 8 - lastWeekDayOfTheMonth).map(
-      (monthDay: number): DatePickerUtils.Day => {
-        const month = selectedDate.add(2, 'month').month();
-        const year = selectedDate.year();
-        const id = getDayId(year, month, monthDay);
-        return {
-          id,
-          value: monthDay,
-          swipeMonth: 1,
-          isSelected: id === selectedDate.format(DateUtils.FormatEnum.En_Date),
-        };
-      }
+  ) =>
+    range(1, 8 - lastWeekDayOfTheMonth).map(
+      (monthDay: number): DatePickerUtils.Day => ({
+        id: selectedDate
+          .add(1, 'month')
+          .format(DateUtils.FormatEnum.En_DateOnly),
+        value: monthDay,
+        swipeMonth: 1,
+      })
     );
-  };
 }

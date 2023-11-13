@@ -26,14 +26,10 @@
   "input.date.weekDay.fri": "Fri",
   "input.date.weekDay.sat": "Sat",
   "input.date.weekDay.sun": "Sun",
-  "input.date.holydays.newYearDay": "New year's day",
-  "input.date.holydays.mayFirst": "Labor Day",
-  "input.date.holydays.mayEight": "Armistice 1945",
-  "input.date.holydays.ascension": "Ascent",
-  "input.date.holydays.pentecost": "Pentecost Monday",
-  "input.date.holydays.july14": "14th July",
-  "input.date.holydays.assumption": "Assumption",
-  "input.date.holydays.toussaint": "Toussaint",
-  "input.date.holydays.november11": "11th November",
-  "input.date.holydays.christmas": "Christmas day"
+  "input.date.settings.title": "Settings",
+  "input.date.settings.subtitle.lang": "Language",
+  "input.date.settings.lang.en": "English",
+  "input.date.settings.lang.fr": "French",
+  "input.date.settings.lang.es": "Spanish",
+  "input.date.settings.subtitle.format": "Format"
 }

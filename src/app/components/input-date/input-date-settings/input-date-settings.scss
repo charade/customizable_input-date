@@ -1,0 +1,60 @@
+@import "../../../../styles/color.scss";
+@import "../../../../styles/mixins.scss";
+
+:host {
+  width: 100%;
+  background-color: $dark-bg;
+  padding: 0 0.5rem;
+
+  .settings-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem;
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .settings-title {
+        color: $dark-subtitle;
+        padding: 0 0.5rem;
+        font-size: 1rem;
+      }
+
+      .close-btn {
+        @include closeButton;
+      }
+    }
+
+    .settings-block {
+      display: flex;
+      flex-direction: column;
+      height: 5%;
+      min-width: 95%;
+      padding: 0;
+      margin-bottom: 0.75rem;
+
+      & > * {
+        margin: 0.25rem 0;
+      }
+
+      .settings-subtitle {
+        border: none;
+        display: flex;
+        align-items: center;
+        padding: 0;
+        color: $dark-subtitle;
+
+        & > * {
+          margin: 0 0.25rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      &:last-child > *:not(:first-child) {
+        font-size: 0.5rem;
+      }
+    }
+  }
+}

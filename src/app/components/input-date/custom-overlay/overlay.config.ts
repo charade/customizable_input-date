@@ -52,7 +52,7 @@ export namespace OverlayUtils {
   ): OverlayConfig => ({
     width: '10rem',
     height: '10rem',
-    hasBackdrop: false,
+    hasBackdrop: true,
     scrollStrategy: overlay.scrollStrategies.reposition(),
     positionStrategy: origin
       ? overlay

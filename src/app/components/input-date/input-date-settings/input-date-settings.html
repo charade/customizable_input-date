@@ -1,0 +1,40 @@
+<div class="settings-container">
+  <div class="settings-header">
+    <h3 class="settings-title">
+      {{ 'input.date.settings.title' | translate }}
+    </h3>
+    <div class="close-btn">
+      <app-icon [name]="IconsEnum.Close" (click)="closeModal()" />
+    </div>
+  </div>
+
+  <div class="settings-block">
+    <div class="settings-subtitle">
+      <app-icon [name]="IconsEnum.Language"></app-icon>
+      <span>{{ 'input.date.settings.subtitle.lang' | translate}}</span>
+    </div>
+
+    <app-button-group
+      [items]="settingsLanguages"
+      [selectedItem]="selectedLang()"
+      (valueChanged)="setLang($event)"
+    />
+  </div>
+
+  <div class="settings-block settings-date-format">
+    <div class="settings-subtitle">
+      <app-icon [name]="IconsEnum.WandMagicSparkles" />
+      <span>{{ 'input.date.settings.subtitle.format' | translate}}</span>
+    </div>
+    <app-button-group
+      [items]="settings_En_DateFormats"
+      [selectedItem]="selectedDateFormat()"
+      (valueChanged)="setDateFormat($event)"
+    />
+    <app-button-group
+      [items]="settings_En_DateFormats"
+      [selectedItem]="selectedDateFormat()"
+      (valueChanged)="setDateFormat($event)"
+    />
+  </div>
+</div>
