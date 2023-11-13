@@ -11,6 +11,7 @@ export namespace DatePickerMonthsUtils {
       label: DatePickerEnum.getMonthName.value(month),
     }));
 
+
     while (months.length) {
       monthDataSource.push(months.splice(0, 4));
     }

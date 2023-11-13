@@ -13,7 +13,7 @@ export namespace DatePickerYearUtils {
     }));
 
     while (years.length) {
-      yearsDataSource.push(years.splice(0, 7));
+      yearsDataSource.push(years.splice(0, 6));
     }
 
     return yearsDataSource;

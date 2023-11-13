@@ -2,10 +2,7 @@
   <!-- header actions buttons -->
   <div class="calendar-header">
     <div>
-      <app-icon
-        [name]="IconsEnum.Close"
-        (click)="closeDatePickerModal()"
-      />
+      <app-icon [name]="IconsEnum.Close" (click)="closeDatePickerModal()" />
     </div>
     <div>
       <span (click)="today()"> {{ "input.date.today" | translate }}</span>
@@ -40,10 +37,10 @@
       </div>
 
       <!-- date view content -->
-
       <div class="date-content" #datePickerView>
         <div *ngIf="viewMode() === DatePickerEnum.View.Week" class="week-table">
-          <div class="single-arrows-container">
+          <!-- circle minus + circle plus icons -->
+          <div class="swipe-weeks-icons-container">
             <app-icon
               [name]="IconsEnum.CircleMinus"
               (click)="swipeWeeksOnArrowClick(-1)"

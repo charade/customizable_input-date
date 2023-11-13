@@ -47,10 +47,8 @@ export class InputDateComponent
   extends CustomControlValueAccessor<dayjs.Dayjs>
   implements OnInit
 {
-  @ViewChild('datePickerOrigin', { read: ElementRef<HTMLDivElement> })
+  @ViewChild('popoverOrigin', { read: ElementRef<HTMLDivElement> })
   popoverOrigin: Element;
-
-  @ViewChild('settingsOrigin', { read: ElementRef }) settingsOrigin: Element;
 
   IconsEnum = IconsEnum;
   DatePickerEnum = DatePickerEnum;
@@ -68,8 +66,8 @@ export class InputDateComponent
   private viewContainerRef = inject(ViewContainerRef);
 
   private readonly DEFAULT_DATE_PICKER_BOUNDS = {
-    width: '22rem',
-    height: '31rem',
+    width: '20rem',
+    height: '30rem',
   };
   private readonly DEFAULT_SETTINGS_MODAL_BOUNDS = {
     width: '15rem',
@@ -92,7 +90,6 @@ export class InputDateComponent
       this.translateService.use(Language.convertToLocale.value(lang))
     );
   }
-
   openDatePickerOnClick() {
     this.overlayService.open<DatePickerUtils.DisplayedDateType>(
       DatePickerComponent,
@@ -108,10 +105,9 @@ export class InputDateComponent
       }
     );
   }
-
   openSettingsOnClick() {
     this.overlayService.open(InputDateSettingsComponent, {
-      origin: this.settingsOrigin,
+      origin: this.popoverOrigin,
       viewContainerRef: this.viewContainerRef,
       config: this.DEFAULT_SETTINGS_MODAL_BOUNDS,
     });

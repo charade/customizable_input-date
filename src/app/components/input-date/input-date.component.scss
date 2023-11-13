@@ -8,16 +8,6 @@
     display: flex;
     align-items: center;
 
-    & > * {
-      cursor: pointer;
-    }
-
-    & > *:last-child {
-      font-size: 0.8rem;
-      margin: 0 0.5rem;
-      color: #000000c6;
-    }
-
     .input-field-container {
       min-width: 10rem;
       font-size: 1rem;
@@ -40,9 +30,11 @@
         }
       }
 
-      & > *:last-child {
-        color: rgba(37, 37, 37, 0.576);
+      & > *:not(.input-field) {
+        cursor: pointer;
         font-size: 0.8rem;
+        color: #323232c6;
+        margin-left: 0.25rem;
       }
     }
   }

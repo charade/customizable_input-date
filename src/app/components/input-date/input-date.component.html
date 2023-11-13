@@ -1,13 +1,9 @@
 <div class="input-container">
-  <div
-    #datePickerOrigin
-    class="input-field-container"
-    (click)="openDatePickerOnClick()"
-  >
+  <div #popoverOrigin class="input-field-container">
     <span class="input-field" [class.placeholder]="!displayedDate()">{{
       displayedDate() || dateFormat() | translate
     }}</span>
-    <app-icon #settingsOrigin [name]="IconsEnum.Calendar" />
+    <app-icon [name]="IconsEnum.Calendar" (click)="openDatePickerOnClick()" />
+    <app-icon [name]="IconsEnum.Settings" (click)="openSettingsOnClick()" />
   </div>
-  <app-icon [name]="IconsEnum.Settings" (click)="openSettingsOnClick()" />
 </div>

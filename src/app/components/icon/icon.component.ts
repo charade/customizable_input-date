@@ -10,9 +10,9 @@ import { IconsEnum } from './utils/icons.enum';
 
 @Component({
   selector: 'app-icon',
+  templateUrl: './icon.component.html',
   standalone: true,
   imports: [FontAwesomeModule],
-  templateUrl: './icon.component.html',
 })
 export class IconComponent {
   @Input({ required: true }) set name(_name: IconsEnum) {

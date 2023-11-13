@@ -2,7 +2,7 @@ import { CustomMap } from 'src/app/utils/struct-utils';
 
 export namespace DatePickerEnum {
   export enum Month {
-    Jan = 1,
+    Jan = 0,
     Feb,
     Mar,
     Apr,

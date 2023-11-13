@@ -88,37 +88,43 @@ export class DatePickerComponent implements OnInit {
   /** split week view in 7 columns table.
    * Chose starting from 1 because i used a lazy enum declaration
    */
-  weekTableColumns: string[] = range(1, 8).map(
+  readonly weekTableColumns: string[] = range(1, 8).map(
     (weekName: DatePickerEnum.WeekDay) =>
       DatePickerEnum.getWeekDayName.value(weekName)
   );
+  /* Helps to split month in 4 columns*/
   readonly monthsDataSource$ = new BehaviorSubject(
     DatePickerMonthsUtils.generateMonths()
   );
-  yearsDataSource$ = new BehaviorSubject(DatePickerYearUtils.generateYears());
-  /* Helps to split month in 4 columns*/
+  readonly monthsTableFakeHeaders = range(0, 4).map((value: number) =>
+    value.toString()
+  );
+
+  readonly yearsDataSource$ = new BehaviorSubject(
+    DatePickerYearUtils.generateYears()
+  );
+  /** split years table in 7 columns */
+  readonly yearsTableFakeHeaders = range(0, 6).map((value: number) =>
+    value.toString()
+  );
 
   readonly selectedMonth = computed(() =>
     (this.overlayRefData.selectedDate() || dayjs()).month()
   );
-
-  monthsTableFakeHeaders = range(0, 4).map((value: number) => value.toString());
-  yearsTableFakeHeaders = range(0, 7).map((value: number) => value.toString());
-
   readonly selectedYear = computed(() =>
     (this.overlayRefData.selectedDate() || dayjs()).year()
   );
   readonly currentWeekOfYear = computed(() =>
     (this.overlayRefData.selectedDate() || dayjs()).week()
   );
-  readonly selectedMinutes = computed(() =>
-    DateUtils.formaDateUnit(
-      (this.overlayRefData.selectedDate() || dayjs()).minute()
-    )
-  );
   readonly selectedHours = computed(() =>
     DateUtils.formaDateUnit(
       (this.overlayRefData.selectedDate() || dayjs()).hour()
+    )
+  );
+  readonly selectedMinutes = computed(() =>
+    DateUtils.formaDateUnit(
+      (this.overlayRefData.selectedDate() || dayjs()).minute()
     )
   );
 
@@ -183,7 +189,7 @@ export class DatePickerComponent implements OnInit {
   }
   swipeWeeksOnArrowClick(direction: 1 | -1) {
     this.overlayRefData.selectedDate.update((date) =>
-      date.add(direction, 'week')
+      (date || dayjs()).add(direction, 'week')
     );
   }
   closeDatePickerModal() {
