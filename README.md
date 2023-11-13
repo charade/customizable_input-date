@@ -2,13 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
-# Taking Control over Input-date design
-
+## Taking Control over Input-date design
 More than having full control over the design, It also allows users to have more flexibility provided by Dayjs.
 Users can edit the date-picker language && the displayed date format.
 
 ![date-picker-img](./src/assets/screenshots/date-picker_1.png)
 ![date-picker-settings-img](./src/assets/screenshots/date-picker_2.png)
+
+## It uses
+standalone components, signals, rxjs, ngx-translate, ngrx/component-store, dayjs, lodash && fortawesome.
 
 ## Development server
 
