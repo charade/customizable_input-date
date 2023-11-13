@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { DatePickerUtils } from '../date-picker/utils.ts/date-picker-utils.index';
 import { Language } from 'src/app/utils/languages';
 import { DateUtils } from '../date-picker/utils.ts/date-utils';
 
