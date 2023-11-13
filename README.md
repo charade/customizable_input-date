@@ -1,11 +1,10 @@
-# Taking Control over Input-date design
-
+# Angular 16
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
-## Angular 16
+# Taking Control over Input-date design
+More than having full control over the design, It also allows users to have more flexibility provided by Dayjs
 
 ## Development server
-
  Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Further help
