@@ -76,7 +76,7 @@ export class InputDateComponent implements OnInit {
   private locale: string;
 
   readonly dateFormat = toSignal(
-    this.store.getDateFormat$.pipe(map((format) => format))
+    this.store.getDateFormat$.pipe(map((format) => format as string))
   );
 
   ngOnInit(): void {
