@@ -1,5 +1,5 @@
-@import "../../../../styles/color.scss";
-@import "../../../../styles/mixins.scss";
+@import "../../styles/color.scss";
+@import "../../styles/mixins.scss";
 
 :host {
   width: 100%;
@@ -22,8 +22,8 @@
         font-size: 1rem;
       }
 
-      .close-btn {
-        @include closeButton;
+      .custom-btn {
+        @include custom-btn;
       }
     }
 

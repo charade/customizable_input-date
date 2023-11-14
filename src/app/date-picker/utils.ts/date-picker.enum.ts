@@ -1,4 +1,4 @@
-import { CustomMap } from 'src/app/utils/struct-utils';
+import { CustomMap } from '../../utils/struct-utils';
 
 export namespace DatePickerEnum {
   export enum Month {

@@ -1,5 +1,5 @@
-@import "../../../../styles/color.scss";
-@import "../../../../styles/mixins.scss";
+@import "../../styles/color.scss";
+@import "../../styles/mixins.scss";
 
 :host {
   .date-picker-overlay {
@@ -20,7 +20,7 @@
       width: 90%;
 
       & > *:first-child {
-        @include closeButton;
+        @include custom-btn;
       }
 
       & > *:last-child > * {
@@ -49,7 +49,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 1.5rem 0;
+          margin: 0.5rem 0;
           min-height: 8rem;
 
           .chevron-left-icon,
@@ -78,27 +78,33 @@
           }
         }
 
-        .swipe-weeks-icons-container {
+        .swipe-months-icons-container {
           display: flex;
           justify-content: center;
+          align-items: center;
+          height: 2.25rem;
 
           & > * {
             margin: 0 1rem;
             font-size: 0.75rem;
+
+            // plus && minus button
+            &:nth-child(2n + 1) {
+              @include custom-btn;
+            }
           }
 
-          .week-order {
+          .info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             color: #ffffffd0;
           }
         }
 
         .date-content {
           height: 15rem;
-
-          .week-table {
-            display: flex;
-            flex-direction: column;
-          }
+          overflow: auto;
 
           table {
             th,
@@ -162,12 +168,12 @@
       .time-view-panel {
         display: flex;
         width: 30%;
-        margin-top: 0.8rem;
+        margin-top: 2rem;
 
         ul {
           position: relative;
           list-style: none;
-          height: 90%;
+          height: 94%;
           overflow: auto;
           padding: 0 0.75rem;
 

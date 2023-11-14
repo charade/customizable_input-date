@@ -38,20 +38,28 @@
 
       <!-- date view content -->
       <div class="date-content" #datePickerView>
-        <div *ngIf="viewMode() === DatePickerEnum.View.Week" class="week-table">
+        <div *ngIf="viewMode() === DatePickerEnum.View.Week">
           <!-- circle minus + circle plus icons -->
-          <div class="swipe-weeks-icons-container">
+          <div class="swipe-months-icons-container">
             <app-icon
               [name]="IconsEnum.CircleMinus"
-              (click)="swipeWeeksOnArrowClick(-1)"
+              (click)="swipeMonthsOnCircleBtnClick(-1)"
             />
-            <span class="week-order">{{
-              "input.date.week.of.year"
-                | translate : { week: currentWeekOfYear() }
-            }}</span>
+            <div class="info">
+              <span
+                >{{
+                  "input.date.week.of.year"
+                    | translate : { week: currentWeekOfYear() }
+                }},</span
+              >
+
+              <span>{{
+                DatePickerEnum.getMonthName.value(selectedMonth()) | translate
+              }}</span>
+            </div>
             <app-icon
               [name]="IconsEnum.CirclePlus"
-              (click)="swipeWeeksOnArrowClick(1)"
+              (click)="swipeMonthsOnCircleBtnClick(1)"
             />
           </div>
 
@@ -115,7 +123,7 @@
               "
             >
               <span>
-                {{ month[column]?.label | translate }}
+                {{ month[column]?.label | translate | slice : 0 : 3 }}
               </span>
             </td>
           </ng-container>

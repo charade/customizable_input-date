@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnInit,
@@ -10,7 +11,7 @@ import {
 } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf, SlicePipe } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OverlayRef } from '@angular/cdk/overlay';
 
@@ -18,16 +19,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { range } from 'lodash';
 import * as dayjs from 'dayjs';
 
-import { IconComponent } from '../../icon/icon.component';
-import { CustomOverlayService } from 'src/app/components/input-date/services/custom-overlay/overlay.service';
+import { IconComponent } from '../icon/icon.component';
+import { CustomOverlayService } from 'src/app/services/custom-overlay/overlay.service';
 
-import { IconsEnum } from '../../icon/utils/icons.enum';
+import { IconsEnum } from '../icon/utils/icons.enum';
 import { DatePickerEnum } from './utils.ts/date-picker.enum';
 
 import { DateUtils } from './utils.ts/date-utils';
 import { DatePickerUtils } from './utils.ts/date-picker-utils.index';
 import { DatePickerWeekUtils } from './utils.ts/date-picker-weeks-utils';
-import { OverlayUtils } from 'src/app/components/input-date/services/custom-overlay/overlay.config';
+import { OverlayUtils } from 'src/app/services/custom-overlay/overlay.config';
 import { DatePickerYearUtils } from './utils.ts/date-picker-years-utils';
 import { DatePickerMonthsUtils } from './utils.ts/date-picker-months-utils';
 
@@ -43,8 +44,10 @@ import { DatePickerMonthsUtils } from './utils.ts/date-picker-months-utils';
     NgIf,
     CdkTableModule,
     NgClass,
+    SlicePipe,
   ],
   providers: [TranslateService, CustomOverlayService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent implements OnInit {
   /** helps scrolling into view selected minute, hour, year */
@@ -63,10 +66,8 @@ export class DatePickerComponent implements OnInit {
   }
 
   @ViewChild('popoverOrigin', { read: Element }) popoverOrigin: Element;
-
   private readonly weekView = DatePickerEnum.View.Week;
   private readonly yearsView = DatePickerEnum.View.Years;
-  /* manages selected date state */
   /** Arbitrary choosing default view to be weeks */
   viewMode: WritableSignal<DatePickerEnum.View> = signal(
     DatePickerEnum.View.Week
@@ -85,9 +86,7 @@ export class DatePickerComponent implements OnInit {
       ),
     ])
   );
-  /** split week view in 7 columns table.
-   * Chose starting from 1 because i used a lazy enum declaration
-   */
+  /** split week view in 7 columns table*/
   readonly weekTableColumns: string[] = range(1, 8).map(
     (weekName: DatePickerEnum.WeekDay) =>
       DatePickerEnum.getWeekDayName.value(weekName)
@@ -99,7 +98,6 @@ export class DatePickerComponent implements OnInit {
   readonly monthsTableFakeHeaders = range(0, 4).map((value: number) =>
     value.toString()
   );
-
   readonly yearsDataSource$ = new BehaviorSubject(
     DatePickerYearUtils.generateYears()
   );
@@ -107,7 +105,6 @@ export class DatePickerComponent implements OnInit {
   readonly yearsTableFakeHeaders = range(0, 6).map((value: number) =>
     value.toString()
   );
-
   readonly selectedMonth = computed(() =>
     (this.overlayRefData.selectedDate() || dayjs()).month()
   );
@@ -187,9 +184,9 @@ export class DatePickerComponent implements OnInit {
         : view + direction
     );
   }
-  swipeWeeksOnArrowClick(direction: 1 | -1) {
+  swipeMonthsOnCircleBtnClick(direction: 1 | -1) {
     this.overlayRefData.selectedDate.update((date) =>
-      (date || dayjs()).add(direction, 'week')
+      (date || dayjs()).add(direction, 'month')
     );
   }
   closeDatePickerModal() {

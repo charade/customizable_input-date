@@ -3,7 +3,7 @@
     *ngFor="let item of items"
     role="button"
     [class.isSelected]="item?.value === selectedItem"
-    (click)="valueChanged.emit(item.value)"
+    (click)="item?.value !== selectedItem && valueChanged.emit(item.value)"
   >
     {{ (item?.label | translate) || item?.value }}
   </span>

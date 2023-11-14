@@ -3,7 +3,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   CssStyleClass,
   IconDefinition,
-  IconName,
   IconPrefix,
 } from '@fortawesome/fontawesome-svg-core';
 import { IconsEnum } from './utils/icons.enum';

@@ -1,7 +1,7 @@
 <div class="input-container">
   <div #popoverOrigin class="input-field-container">
     <span class="input-field" [class.placeholder]="!displayedDate()">{{
-      displayedDate() || dateFormat() | translate
+      displayedDate() || dateFormat() | translate | lowercase
     }}</span>
     <app-icon [name]="IconsEnum.Calendar" (click)="openDatePickerOnClick()" />
     <app-icon [name]="IconsEnum.Settings" (click)="openSettingsOnClick()" />

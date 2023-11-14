@@ -3,29 +3,28 @@ import { Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { CustomOverlayService } from 'src/app/components/input-date/services/custom-overlay/overlay.service';
-import { IconsEnum } from '../../icon/utils/icons.enum';
-
-import { IconComponent } from '../../icon/icon.component';
-import { ButtonGroupComponent } from '../../button-group/button-group.component';
+import { CustomOverlayService } from 'src/app/services/custom-overlay/overlay.service';
 
 import { Language } from 'src/app/utils/languages';
 import { InputDateStore } from '../services/input-date.store/input-date.store.index';
 import { DateUtils } from '../date-picker/utils.ts/date-utils';
+import { IconComponent } from 'src/app/icon/icon.component';
+import { ButtonGroupComponent } from 'src/app/button-group/button-group.component';
+import { IconsEnum } from 'src/app/icon/utils/icons.enum';
 
 @Component({
   selector: 'app-input-date-settings',
   templateUrl: './input-date-settings.html',
   styleUrls: ['./input-date-settings.scss'],
   standalone: true,
-  providers: [CustomOverlayService],
   imports: [TranslateModule, IconComponent, ButtonGroupComponent],
+  providers: [CustomOverlayService],
 })
 export class InputDateSettingsComponent {
   IconsEnum = IconsEnum;
   readonly settingsLanguages = Language.settings;
-  readonly settings_En_DateFormats = DateUtils.settingsDateFormats.slice(0, 2);
-  readonly settings_Fr_DateFormats = DateUtils.settingsDateFormats.slice(2, 4);
+  readonly bigEndianDateFormats = DateUtils.settingsDateFormats.slice(0, 2);
+  readonly littleEndianDateFormats = DateUtils.settingsDateFormats.slice(2, 4);
 
   private store = inject(InputDateStore);
   private readonly overlayRef = inject(OverlayRef);

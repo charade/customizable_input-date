@@ -1,4 +1,4 @@
-@import "../../../styles/color.scss";
+@import "../../styles/color.scss";
 
 :host {
   .button-group-container {
@@ -8,7 +8,7 @@
     flex-wrap: wrap;
 
     & > * {
-      border: .5px solid lightgrey;
+      border: 0.5px solid lightgrey;
       height: 2.5rem;
       padding: 0 0.5rem;
       display: flex;
@@ -30,7 +30,7 @@
 
       &.isSelected {
         background-color: $light-smooth-purple;
-        // color: #4240409c;
+        cursor: initial;
       }
     }
   }

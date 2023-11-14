@@ -3,7 +3,7 @@
     <h3 class="settings-title">
       {{ 'input.date.settings.title' | translate }}
     </h3>
-    <div class="close-btn">
+    <div class="custom-btn">
       <app-icon [name]="IconsEnum.Close" (click)="closeModal()" />
     </div>
   </div>
@@ -27,12 +27,12 @@
       <span>{{ 'input.date.settings.subtitle.format' | translate}}</span>
     </div>
     <app-button-group
-      [items]="settings_En_DateFormats"
+      [items]="bigEndianDateFormats"
       [selectedItem]="selectedDateFormat()"
       (valueChanged)="setDateFormat($event)"
     />
     <app-button-group
-      [items]="settings_Fr_DateFormats"
+      [items]="littleEndianDateFormats"
       [selectedItem]="selectedDateFormat()"
       (valueChanged)="setDateFormat($event)"
     />

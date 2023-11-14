@@ -1,18 +1,5 @@
-import {
-  ConnectedPosition,
-  GlobalPositionStrategy,
-  Overlay,
-  OverlayConfig,
-  ScrollStrategy,
-} from '@angular/cdk/overlay';
-import {
-  ElementRef,
-  InjectionToken,
-  ViewContainerRef,
-  WritableSignal,
-} from '@angular/core';
-import { Dayjs } from 'dayjs';
-import { Language } from 'src/app/utils/languages';
+import { Overlay, OverlayConfig, ScrollStrategy } from '@angular/cdk/overlay';
+import { InjectionToken, ViewContainerRef } from '@angular/core';
 import { CustomMap } from 'src/app/utils/struct-utils';
 
 export enum ScrollStrategyEnum {

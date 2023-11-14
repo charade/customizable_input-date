@@ -1,29 +1,19 @@
-import { CustomMap } from 'src/app/utils/struct-utils';
 import {
   IconDefinition,
-  IconName,
   faAngleDoubleLeft,
   faAngleDoubleRight,
-  faArrowLeft,
-  faArrowRight,
-  faCalendar,
   faCalendarAlt,
-  faCalendarDays,
-  faCalendarPlus,
-  faChevronLeft,
-  faChevronRight,
   faCircleMinus,
   faCirclePlus,
   faClose,
   faCog,
-  faCross,
   faLanguage,
-  faMinusCircle,
   faTrashAlt,
   faWandMagicSparkles,
   faWarning,
-  faWindowClose,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { CustomMap } from '../../utils/struct-utils';
 
 export enum IconsEnum {
   Calendar = 1,
