@@ -8,8 +8,9 @@
     flex-wrap: wrap;
 
     & > * {
+      flex: 1;
       border: 0.5px solid lightgrey;
-      height: 2.5rem;
+      height: 2.75rem;
       padding: 0 0.5rem;
       display: flex;
       align-items: center;

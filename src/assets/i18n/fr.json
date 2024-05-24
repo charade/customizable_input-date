@@ -31,6 +31,7 @@
   "input.date.settings.lang.en": "Anglais",
   "input.date.settings.lang.fr": "Français",
   "input.date.settings.lang.es": "Espagnol",
+  "input.date.settings.lang.ch": "Chinois",
   "input.date.settings.subtitle.format": "Format",
   "input.date.description": "Ce composant de saisie de date offre de nombreuses options et plus de flexibilité aux utilisateurs. Les utilisateurs peuvent désormais choisir un format personnalisé pour afficher la date et l'heure. le composant flex-date offre également la possibilité de choisir la langue du calendrier, contrairement aux calendriers natifs, les utilisateurs ont plus d'options de personnalisation.",
   "input.date.subDescription": "Ce composant de saisie de date offre aux utilisateurs la puissance et la flexibilité de la bibliothèque Dayjs. Il est prêt à être utilisé sur n'importe quelle application. Essayez-le maintenant !"
