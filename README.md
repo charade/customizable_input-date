@@ -1,6 +1,8 @@
-# Angular 16
+# Flex-date
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+## About
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
 ## Taking Control over Input-date design
 
