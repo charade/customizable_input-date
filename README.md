@@ -11,6 +11,7 @@ Users can edit the date-picker language && the displayed date format.
 
 ![date-picker-img](./src/assets/screenshots/date-picker_1.png)
 ![date-picker-settings-img](./src/assets/screenshots/date-picker_2.png)
+![date-picker-calendar-in-chinese](./src/assets/screenshots/flex-date-calendar-chinese.png)
 
 ## It uses
 
