@@ -105,7 +105,7 @@ export class InputDateComponent implements OnInit {
     this.overlayService.open(InputDateSettingsComponent, {
       origin: this.popoverOrigin,
       viewContainerRef: this.viewContainerRef,
-      config: this.DEFAULT_SETTINGS_MODAL_BOUNDS,
+      config: { width: '18rem', height: '18rem' },
     });
   }
 }

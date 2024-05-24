@@ -1,7 +1,7 @@
 :host {
   display: flex;
   justify-content: center;
-  padding-top: 4.5rem;
+  padding-top: 3rem;
   width: 100%;
   height: 100%;
   position: relative;
@@ -25,11 +25,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top: 0.75rem;
-
-      & > * {
-        margin: 0.75rem 0;
-      }
 
       .description,
       .sub-description {
@@ -38,7 +33,7 @@
       }
 
       .description {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 300;
         max-width: 89%;
         text-align: center;
@@ -46,9 +41,9 @@
 
       .sub-description {
         position: absolute;
-        top: 50%;
+        top: 55%;
         left: 4.5rem;
-        padding-top: 4rem;
+        padding-top: 3rem;
         border-top: 1px solid #ffffff68;
         font-size: 1.2rem;
         width: 38.5rem;
@@ -66,8 +61,8 @@
 
 @media screen and (min-width: 1025px) {
   .app-content {
-    margin-top: 2% !important;
-
+    margin-top: 0.4% !important;
+    height: 20rem;
     flex-direction: row-reverse !important;
     justify-content: flex-end !important;
     padding-left: 5rem;
@@ -78,6 +73,7 @@
       border-right: 1px solid #ffffff68;
       padding-right: 2rem;
       margin-right: 3rem !important;
+      font-size: 1.5rem !important;
     }
 
     .sub-description {
