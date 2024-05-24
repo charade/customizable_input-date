@@ -32,6 +32,6 @@
   "input.date.settings.lang.fr": "French",
   "input.date.settings.lang.es": "Spanish",
   "input.date.settings.subtitle.format": "Format",
-  "input.date.description": "This input date component provide many options and more flexibility to users. Users can now choose a custom format to display the date and time. the Flex-date component also provides the option to choose the calendar language, unlike native calendars users can customize it.",
-  "input.date.subDescription": "This flexible input-date component provide to users the power and the flexibility of Dayjs library. It's ready to go on any apps.Try it now !"
+  "input.date.description": "This input date component provides many options and more flexibility to users. Users can now choose a custom format to display the date and time. the Flex-date component also provides the option to choose the calendar language, unlike native calendars users can customize it.",
+  "input.date.subDescription": "This flexible input-date component also provides to users the power and the flexibility of the Dayjs library. It's ready to go on any apps.Try it now !"
 }
