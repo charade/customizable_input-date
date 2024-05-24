@@ -1,4 +1,4 @@
-# Flex-date
+# A customizable input-date component...
 
 ## About
 
