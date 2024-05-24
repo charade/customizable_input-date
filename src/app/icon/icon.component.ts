@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
-  CssStyleClass,
   IconDefinition,
-  IconPrefix,
-} from '@fortawesome/fontawesome-svg-core';
+  faArrowAltCircleLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { IconsEnum } from './utils/icons.enum';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-icon',
@@ -14,13 +14,11 @@ import { IconsEnum } from './utils/icons.enum';
   imports: [FontAwesomeModule],
 })
 export class IconComponent {
+  public icon: IconProp;
+
   @Input({ required: true }) set name(_name: IconsEnum) {
     this.icon = IconsEnum.getName.value(_name);
   }
 
   @Input() cssClass: string;
-  @Input() iconClass: CssStyleClass;
-  @Input() prefix: IconPrefix;
-
-  public icon: IconDefinition;
 }

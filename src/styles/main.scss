@@ -11,6 +11,19 @@ body {
 
 body {
   font-size: 62.5%;
+  background: linear-gradient(
+      217deg,
+      rgb(189, 51, 65),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(8, 52, 8, 0.6), rgba(7, 90, 7, 0) 70.71%),
+    linear-gradient(336deg, rgb(50, 29, 168), rgba(0, 0, 255, 0) 70.71%);
+
+  // linear-gradient(
+  //   200deg,
+
+  // ),
+  // linear-gradient(10deg, rgb(201, 186, 215));
 }
 
 .cdk-overlay-pane {
