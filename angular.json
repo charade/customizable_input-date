@@ -27,7 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/main.scss"],
+            "styles": ["src/styles/main.scss", "src/styles/fonts.scss"],
             "allowedCommonJsDependencies": ["dayjs"],
             "scripts": []
           },

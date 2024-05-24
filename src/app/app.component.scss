@@ -1,16 +1,90 @@
 :host {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 4.5rem;
+  width: 100%;
+  height: 100%;
+  position: relative;
 
   .app-container {
-    display: flex;
-    justify-content: center;
-    max-width: 15rem;
-    height: 7rem;
-    border-radius: 1rem;
-    padding: 1rem;
-    border: none;
-    box-shadow: 0 0 3px #000;
+    width: 100%;
+    height: 100%;
+
+    h1 {
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+      font-family: "nueva-garcia-regular";
+      color: #ffffffd3;
+      font-size: 2rem;
+      text-shadow: 0 0 3px #00000079;
+    }
+
+    .app-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+
+      & > * {
+        margin: 0.75rem 0;
+      }
+
+      .description,
+      .sub-description {
+        font-family: "khand-regular";
+        color: #fff;
+      }
+
+      .description {
+        font-size: 1.4rem;
+        font-weight: 300;
+        max-width: 89%;
+        text-align: center;
+      }
+
+      .sub-description {
+        position: absolute;
+        top: 50%;
+        left: 4.5rem;
+        padding-top: 4rem;
+        border-top: 1px solid #ffffff68;
+        font-size: 1.2rem;
+        width: 38.5rem;
+        display: none;
+      }
+
+      .divider {
+        height: 3px;
+        width: 70%;
+        border-bottom: 1px solid #ffffff57;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .app-content {
+    margin-top: 2% !important;
+
+    flex-direction: row-reverse !important;
+    justify-content: flex-end !important;
+    padding-left: 5rem;
+
+    .description {
+      max-width: 48% !important;
+      text-align: start !important;
+      border-right: 1px solid #ffffff68;
+      padding-right: 2rem;
+      margin-right: 3rem !important;
+    }
+
+    .sub-description {
+      display: block !important;
+    }
+    .divider {
+      display: none;
+    }
   }
 }

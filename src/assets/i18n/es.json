@@ -31,5 +31,7 @@
   "input.date.settings.lang.en": "Inglesa",
   "input.date.settings.lang.fr": "Francés",
   "input.date.settings.lang.es": "Español",
-  "input.date.settings.subtitle.format": "Formato"
+  "input.date.settings.subtitle.format": "Formato",
+  "input.date.description": "Este componente de entrada de fecha ofrece muchas opciones y más flexibilidad a los usuarios. Los usuarios ahora pueden elegir un formato personalizado para mostrar la fecha y la hora. El componente de fecha flexible también ofrece la opción de elegir el idioma del calendario; a diferencia de los calendarios nativos, los usuarios tienen más opciones de personalización.",
+  "input.date.subDescription": "Este componente de fecha de entrada de flexibilidad proporciona a los usuarios el poder y la flexibilidad de la biblioteca dayjs. Está listo para funcionar en cualquier aplicación. ¡Pruébelo ahora!"
 }

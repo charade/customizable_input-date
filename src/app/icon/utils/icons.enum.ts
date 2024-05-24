@@ -1,5 +1,4 @@
 import {
-  IconDefinition,
   faAngleDoubleLeft,
   faAngleDoubleRight,
   faCalendarAlt,

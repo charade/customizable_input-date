@@ -1,9 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  IconDefinition,
-  faArrowAltCircleLeft,
-} from '@fortawesome/free-solid-svg-icons';
 import { IconsEnum } from './utils/icons.enum';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
